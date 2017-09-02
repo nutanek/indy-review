@@ -26,6 +26,7 @@ theme.directive('indyImg', [ '$window', function($window) {
 
                 function setSize() {
                     var wFrame = element[0].offsetWidth;
+                    console.log(wFrame);
                     var hFrame = wFrame * (element[0].attributes["wrap-height"].nodeValue);
 
                     var thisImg = element.find('img');
@@ -40,7 +41,7 @@ theme.directive('indyImg', [ '$window', function($window) {
                         var rest = hEnlarge - hFrame;
                         var part = rest / 3;
                         ctrl.setImgSize({
-                            "top": -(part) - 2 + "px",
+                            "marginTop": -(part) - 2 + "px",
                             "width": "100%",
                             "height": "auto"
                         });
@@ -49,7 +50,7 @@ theme.directive('indyImg', [ '$window', function($window) {
                         var rest = wEnlarge - wFrame;
                         var part = rest / 2;
                         ctrl.setImgSize({
-                            "left": -(part) + "px",
+                            "marginLeft": -(part) + "px",
                             "height": hFrame + "px",
                             "width": "auto"
                         });

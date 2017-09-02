@@ -24,3 +24,35 @@
 .font-normal {
     font-family: 'Tahoma', 'Geneva', 'sans-serif';
 }
+
+.no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/****************** Header ******************/
+.header {
+
+}
+.headertop {
+
+}
+.headertop__logo {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.headertop__logo img {
+    max-width: 350px;
+}
+.headertop__social {
+
+}
+.headertop__serach {
+
+}
+.headernav {
+
+}
+.headernav--lg {
+    
+}

@@ -1,7 +1,7 @@
-var theme = angular.module('indyBlog', []);
+var theme = angular.module('indyReview', []);
 
 theme.controller('header', ['$scope', '$timeout', function($scope, $timeout) {
-
+    
 }]);
 
 theme.controller('article', ['$scope', '$timeout', function($scope, $timeout) {

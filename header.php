@@ -12,23 +12,6 @@
 		<?php endif; ?>
 		<?php wp_head(); ?>
 	</head>
-	<body ng-app="indyBlog">
+	<body ng-app="indyReview">
 		<div class="container-fluid">
-			<header class="header">
-				<div class="hidden-sm hidden-xs">
-					<?php nav_bar("lg"); ?>
-				</div>
-				<div class="hidden-lg hidden-md">
-					<?php nav_bar("xs"); ?>
-				</div>
-				<?php if (is_home()) : ?>
-					<div class="row headercover text-center" style="background-image: url('<?php echo get_cover_homepage(); ?>');">
-						<h1 class="headercover__title font-theme"><?php echo get_bloginfo( 'description' ); ?></h1>
-						<div class="col-sm-offset-3 col-sm-6 headercover__search">
-							<div class="col-xs-12">
-								<?php search_form(); ?>
-							</div>
-						</div>
-					</div>
-				<?php endif; ?>
-			</header>
+			<?php get_componet('header'); ?>
