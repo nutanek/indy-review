@@ -1,0 +1,42 @@
+<div class="col-md-2 col-sm-4 sidebar" menu-height ng-style="{'height': menuHeight}">
+    <div class="row sidebar__profile text-center">
+        <a ng-href="{{config.setting.profile}}" target="_blank">
+            <div class="img">
+                <img ng-src="{{config.admin.profile_img}}" alt="">
+            </div>
+        </a>
+        <div class="name font-theme">
+            {{config.admin.name}}
+        </div>
+    </div>
+    <div class="row sidebar__menu">
+        <div class="col-xs-12 font-theme">
+            <a href="#/">
+                <div class="col-xs-12 list">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 font-theme">
+            <a href="#/categories">
+                <div class="col-xs-12 list">
+                    <i class="fa fa-th-large" aria-hidden="true"></i> Categories
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 font-theme">
+            <a href="#/cover">
+                <div class="col-xs-12 list">
+                    <i class="fa fa-photo" aria-hidden="true"></i> Cover
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 font-theme">
+            <a href="#/comment">
+                <div class="col-xs-12 list">
+                    <i class="fa fa-comments" aria-hidden="true"></i> Comment
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

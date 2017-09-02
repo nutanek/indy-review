@@ -1,0 +1,92 @@
+<div class="panel panel-default">
+    <div class="panel-heading content__header">
+        <div class="row">
+            <div class="col-xs-12">
+                <i class="fa fa-photo" aria-hidden="true"></i>&nbsp;
+                <b>Cover</b>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-offset-3 col-md-6">
+
+            <div class="row">
+                <label>เปลี่ยนรูปภาพปกหน้าแรก:</label>
+                <ul class="list-group cover__list">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <a ng-href="{{config.site_url}}" target="_blank">หน้าแรก</a>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <i class="fa fa-pencil edit" aria-hidden="true" ng-click="openPopup(0)"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <label>เปลี่ยนรูปภาพปกแต่ละหมวดหมู่:</label>
+                <ul class="list-group cover__list">
+                    <li class="list-group-item" ng-repeat="cat in listCategory">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <a ng-href="{{config.site_url}}/?cat={{cat.id}}" target="_blank">{{cat.name}}</a>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <i class="fa fa-pencil edit" aria-hidden="true" ng-click="openPopup(cat.id)"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="coverPopup" class="modal animated bounceInUp" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <i class="fa fa-photo" aria-hidden="true"></i> ใส่ URL รูปภาพปก ({{currentCatName}})
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" ng-show="img.show">
+                    <div class="col-xs-12 text-center">
+                        <img ng-src="{{img.url}}" class="cover__img">
+                    </div>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" ng-model="currentCat.selected" value="1" ng-change="showCoverImage(1)">URL รูปภาพ</label>
+                </div>
+                <input type="text" class="form-control"
+                    ng-model="currentCat.imgUrl" ng-disabled="currentCat.selected!=='1'" ng-change="showCoverImage(1)"
+                        placeholder="ex. https//www.indytheme.com/images/cover.jpg">
+
+                <div class="radio">
+                    <label><input type="radio" ng-model="currentCat.selected" value="2" ng-change="showCoverImage(2)">รูปภาพในธีม</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon hidden-xs">{{config.theme_url}}/images/cover/</span>
+                    <span class="input-group-addon  hidden-lg  hidden-md  hidden-sm">.../images/cover/</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon3"
+                        ng-model="currentCat.imgName" ng-disabled="currentCat.selected!=='2'"
+                            ng-change="showCoverImage(2)" placeholder="example.jpg">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="saveChange()">
+                    <i class="fa fa-check" aria-hidden="true"></i> SAVE
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-ban" aria-hidden="true"></i> CANCEL
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

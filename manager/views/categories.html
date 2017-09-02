@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-heading content__header">
+        <div class="row">
+            <div class="col-xs-6">
+                <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;
+                <b>Categories</b>
+            </div>
+            <div class="col-xs-6 text-right">
+                <a ng-href="{{config.setting.category}}" target="_blank" role="button" class="btn btn-info">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create new category
+                </a>
+                <button type="button" class="btn btn-success" ng-click="saveChange()">
+                    <i class="fa fa-check" aria-hidden="true"></i> SAVE
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="row">
+                <div class="col-sm-9 col-xs-7">
+                    <div class="form-group">
+                        <label for="sel1">เลือกหมวดหมู่:</label>
+                        <select class="form-control input-lg" ng-model="selectedCat" ng-options="cat.name for cat in listCategory"></select>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-5">
+                    <label for="sel1">&nbsp;</label>
+                    <button type="button" class="btn btn-primary btn-block btn-lg" ng-click="addCategory()">
+                        <i class="fa fa-plus" aria-hidden="true"></i> ADD
+                    </button>
+                </div>
+            </div>
+            <div class="row dragable-list category__list">
+                <div class="col-xs-12">
+                    <label>เรียงลำดับหมวดหมู่:</label>
+                    <div class="col-xs-12 empty text-center" ng-hide="orderedCatList.length !== 0">
+                        ยังไม่มีหมวดหมู่
+                    </div>
+                    <ul dnd-list="orderedCatList" class="list-group">
+                        <li class="list-group-item"
+                            ng-repeat="cat in orderedCatList"
+                            dnd-draggable="cat"
+                            dnd-moved="orderedCatList.splice($index, 1)"
+                            dnd-effect-allowed="move">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <i class="fa fa-arrows" aria-hidden="true"></i> &nbsp; {{cat.name}}
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <i class="fa fa-times remove" aria-hidden="true" ng-click="removeCategory(cat.id)"></i>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

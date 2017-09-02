@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading content__header">
+        <div class="row">
+            <div class="col-xs-6">
+                <i class="fa fa-comments" aria-hidden="true"></i>&nbsp;
+                <b>Comment</b>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button type="button" class="btn btn-success" ng-click="saveChange()">
+                    <i class="fa fa-check" aria-hidden="true"></i> SAVE
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="row">
+                <label for="sel1">เลือกรูปแบบกล่อง comment:</label>
+                <ul class="list-group comment__list">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <i class="fa fa-wordpress" aria-hidden="true"></i> &nbsp; Wordpress
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <img ng-src="{{config.theme_url}}/manager/images/{{status.wp? 'on' : 'off'}}.png"
+                                    ng-click="changeStatus('wp')" alt="switch" class="toggle">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <i class="fa fa-facebook-official" aria-hidden="true"></i> &nbsp; Facebook
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <img ng-src="{{config.theme_url}}/manager/images/{{status.fb? 'on' : 'off'}}.png"
+                                    ng-click="changeStatus('fb')" alt="switch" class="toggle">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="panel panel-success maual">
+    <div class="panel-heading">คู่มือการใช้งานเบื้องต้น</div>
+    <div class="panel-body">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading maual__topic" ng-click="toggle(0)">
+                    <div class="row">
+                        <div class="col-xs-9">การเพิ่มเมนูหัวเว็บไซต์</div>
+                        <div class="col-xs-3 text-right">
+                            <i class="fa fa-chevron-up" aria-hidden="true" ng-show="toggleStatus[0]"></i>
+                            <i class="fa fa-chevron-down" aria-hidden="true" ng-hide="toggleStatus[0]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" ng-show="toggleStatus[0]">
+                    <ul>
+                        <li>คลิกที่แท็บ <b><i class="fa fa-th-large" aria-hidden="true"></i> Categories</b></li>
+                        <li>ที่ตัวเลือกดรอปดาวน์ ให้เลือกหมวดหมู่ที่ต้องการให้แสดง (หากยังไม่ได้สร้างหมวดหมู่ ให้คลิกที่ <btn-new-cat></btn-new-cat> มุมบนขวามือ)</li>
+                        <li>กดปุ่ม <btn-add></btn-add></li>
+                        <li>กดปุ่ม <btn-save></btn-save></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading maual__topic" ng-click="toggle(1)">
+                    <div class="row">
+                        <div class="col-xs-9">การเรียงลำดับเมนู</div>
+                        <div class="col-xs-3 text-right">
+                            <i class="fa fa-chevron-up" aria-hidden="true" ng-show="toggleStatus[1]"></i>
+                            <i class="fa fa-chevron-down" aria-hidden="true" ng-hide="toggleStatus[1]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" ng-show="toggleStatus[1]">
+                    <ul>
+                        <li>คลิกที่แท็บ <b><i class="fa fa-th-large" aria-hidden="true"></i> Categories</b></li>
+                        <li>ที่รายการหมวดหมู่ สามารถคลิกลากเพื่อจัดลำดับได้</li>
+                        <li>เสร็จแล้วกดปุ่ม <btn-save></btn-save></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading maual__topic" ng-click="toggle(2)">
+                    <div class="row">
+                        <div class="col-xs-9">การใส่รูปภาพปกของแต่ละหมวดหมู่</div>
+                        <div class="col-xs-3 text-right">
+                            <i class="fa fa-chevron-up" aria-hidden="true" ng-show="toggleStatus[2]"></i>
+                            <i class="fa fa-chevron-down" aria-hidden="true" ng-hide="toggleStatus[2]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" ng-show="toggleStatus[2]">
+                    <ul>
+                        <li>คลิกที่แท็บ <b><i class="fa fa-photo" aria-hidden="true"></i> Cover</b></li>
+                        <li>คลิกที่รายการหมวดหมู่ที่ต้องการเพิ่มรูปภาพปก</li>
+                        <li>เลือกประเภท url ภาพ (รูปภาพภายนอก, รูปภาพในธีม)</li>
+                        <li>เสร็จแล้วกดปุ่ม <btn-save></btn-save></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading maual__topic" ng-click="toggle(3)">
+                    <div class="row">
+                        <div class="col-xs-9">กำหนดรูปแบบของกล่อง Comment</div>
+                        <div class="col-xs-3 text-right">
+                            <i class="fa fa-chevron-up" aria-hidden="true" ng-show="toggleStatus[3]"></i>
+                            <i class="fa fa-chevron-down" aria-hidden="true" ng-hide="toggleStatus[3]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" ng-show="toggleStatus[3]">
+                    <ul>
+                        <li>คลิกที่แท็บ <b><i class="fa fa-comments" aria-hidden="true"></i> Comment</b></li>
+                        <li>จะเห็นว่ามีกล่อง comment 2 แบบให้เลือก คือ Wordpess comment box และ Facebook comment box</li>
+                        <li>คลิกที่ปุ่ม <i class="fa fa-toggle-on" aria-hidden="true"></i> เพื่อเปิด/ปิด การใช้งาน</li>
+                        <li>เสร็จแล้วกดปุ่ม <btn-save></btn-save></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
