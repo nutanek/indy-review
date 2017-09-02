@@ -1,0 +1,26 @@
+/*
+/---------- Theme: indyReview
+/---------- Author: indytheme.com
+*/
+
+.img_fade:hover {
+    -webkit-transition: opacity .3s linear;
+    -moz-transition: opacity .3s linear;
+    opacity: .60;
+}
+
+@font-face {
+    font-family: 'thaisanslite-font';
+    src: url('../fonts/thaisanslite_r1-webfont.eot');
+    src: url('../fonts/thaisanslite_r1-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/thaisanslite_r1-webfont.woff') format('woff'), url('../font/thaisanslite_r1-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-theme {
+    font-family: thaisanslite-font;
+}
+
+.font-normal {
+    font-family: 'Tahoma', 'Geneva', 'sans-serif';
+}

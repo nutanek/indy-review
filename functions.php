@@ -46,7 +46,7 @@
 	function custom_toolbar_link($wp_admin_bar) {
 		$args = array(
 			'id' => 'manage-variety',
-			'title' => '<span class="ab-icon"></span><span class="ab-label">จัดการธีม indyBlog</span>',
+			'title' => '<span class="ab-icon"></span><span class="ab-label">จัดการธีม indyReview</span>',
 			'href' => get_template_directory_uri().'/manager',
 		);
 		$wp_admin_bar->add_node($args);
