@@ -50,9 +50,17 @@
 .headertop__serach {
 
 }
-.headernav {
-
-}
 .headernav--lg {
-    
+    border-top: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+}
+.headernav--lg ul {
+    margin-bottom: 0;
+    list-style-type: none;
+}
+.headernav--lg ul li {
+    /*background: #FFCC00;*/
+    padding: 10px 10px;
+    font-size: 17pt;
+    font-weight: 600;
 }

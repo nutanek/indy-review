@@ -15,3 +15,4 @@
 	<body ng-app="indyReview">
 		<div class="container-fluid">
 			<?php get_componet('header'); ?>
+			<?php get_componet('nav-lg'); ?>

@@ -1,5 +1,4 @@
 <?php
-
 	function theme_styles() {
 		//include CSS file
 		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
@@ -22,6 +21,8 @@
 	add_action( 'after_switch_theme', 'indyBlog_theme_setup' );
 	add_action( 'after_setup_theme', 'indyBlog_theme_setup' );
 	function indyBlog_theme_setup() {
+		global $theme_lang;
+		$theme_lang = get_locale();
 	    add_theme_support( 'post-thumbnails');
 		$imgCover = get_template_directory_uri().'/images/cover/home.jpg';
 		$option = get_option('indyblog_cover_homepage');
@@ -49,10 +50,29 @@
 		return $filtered_title;
 	}
 
+	function __indy($text) {
+		global $theme_lang;
+		if ($theme_lang == 'th' || $theme_lang == 'th_TH') {
+			include(locate_template('languages/th.php'));
+			if (isset($lang_th[$text])) {
+				return $lang_th[$text];
+			} else {
+				return $text;
+			}
+		} else {
+			include(locate_template('languages/en.php'));
+			if (isset($lang_en[$text])) {
+				return $lang_en[$text];
+			} else {
+				return $text;
+			}
+		}
+	}
+
 	function custom_toolbar_link($wp_admin_bar) {
 		$args = array(
 			'id' => 'manage-variety',
-			'title' => '<span class="ab-icon"></span><span class="ab-label">จัดการธีม indyReview</span>',
+			'title' => '<span class="ab-icon"></span><span class="ab-label">'.__indy('manage_indyreview').'</span>',
 			'href' => get_template_directory_uri().'/manager',
 		);
 		$wp_admin_bar->add_node($args);
