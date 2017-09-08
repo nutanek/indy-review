@@ -60,7 +60,17 @@
 }
 .headernav--lg ul li {
     /*background: #FFCC00;*/
-    padding: 10px 10px;
+    margin: 0 10px;
+    padding: 10px 20px;
     font-size: 17pt;
     font-weight: 600;
+}
+.headernav--lg ul li.-dotted::before {
+    font-family: FontAwesome;
+    content: "\f111";
+    font-size: 6pt; 
+    position: absolute;
+    margin-left: -35px;
+    margin-top: 14px;
+    color: #e67e22;
 }

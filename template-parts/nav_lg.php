@@ -4,7 +4,10 @@
             <li class="headernav--lg__menu">
                 <?php echo __indy('home'); ?>
             </li>
-            <li class="headernav--lg__menu">
+            <li class="headernav--lg__menu -dotted">
+                <?php echo __indy('home'); ?>
+            </li>
+            <li class="headernav--lg__menu -dotted">
                 <?php echo __indy('home'); ?>
             </li>
         </ul>
