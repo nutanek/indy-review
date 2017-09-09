@@ -233,6 +233,8 @@
 				get_part('nav_lg'); break;
 			case 'slider':
 				get_part('slider'); break;
+			case 'post-item':
+				include_part('post_item'); break;
 			default:
 				# code...
 				break;
