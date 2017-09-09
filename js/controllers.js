@@ -1,8 +1,13 @@
 var theme = angular.module('indyReview', []);
 
-theme.controller('header', ['$scope', '$timeout', function($scope, $timeout) {
-    
+theme.run(function($rootScope) {
+    $rootScope.indyConfig = indyConfig;
+});
+
+theme.controller('header', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
+   
 }]);
+
 
 theme.controller('article', ['$scope', '$timeout', function($scope, $timeout) {
 

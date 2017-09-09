@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" ng-controller="header">
     <div class="row headertop justify-content-center">
         <div class="col-md-11">
             <div class="row">

@@ -18,6 +18,18 @@ $img = array(
         <div class="card-body">
             <p class="card-text"><?php echo $lorem[$i%3]?> <?php echo $i ?></p>
         </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    <small class="text-muted">3 mins ago</small>
+                </div>
+                <div class="col text-right">
+                <span class="badge badge-dark">4.5</span>
+                    <img ng-src="{{indyConfig.theme_url + '/images/emo/<?php echo ($i%5)+1 ?>.svg'}}"
+                        style="width: 20px">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php endfor; ?>

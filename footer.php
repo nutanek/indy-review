@@ -6,20 +6,5 @@
 				</div>
 			</footer>
 		</div>
-		<script src="https://unpkg.com/masonry-layout@4.2.0/dist/masonry.pkgd.min.js"></script>
-		<script src="https://unpkg.com/imagesloaded@4.1.3/imagesloaded.pkgd.min.js"></script>
-		<script>
-			$(document).ready(function () {
-				var $container = $('.grid');
-				$container.imagesLoaded( function() {
-					$container.masonry({
-						itemSelector: ".grid-item",
-						layoutMode: 'masonry',
-						transitionDuration: '0.5s'
-					});
-				});
-			});
-			
-		</script>
 	</body>
 </html>

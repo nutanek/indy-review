@@ -10,13 +10,18 @@
 		wp_enqueue_script( 'jquery-js', get_template_directory_uri() . '/js/jquery.min.js');
 		wp_enqueue_script( 'popper-js', get_template_directory_uri() . '/js/popper.min.js');
 		wp_enqueue_script( 'slide-js', get_template_directory_uri() . '/js/slide.js');
-		wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
+	}
+	add_action( 'wp_enqueue_scripts', 'theme_styles' );
+
+	function footer_script() {
+		// wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
 		wp_enqueue_script( 'angular-js', get_template_directory_uri() . '/js/angular.min.js');
 		wp_enqueue_script( 'controllers-js', get_template_directory_uri() . '/js/controllers.js');
 		wp_enqueue_script( 'services-js', get_template_directory_uri() . '/js/services.js');
 		wp_enqueue_script( 'directives-js', get_template_directory_uri() . '/js/directives.js');
+		wp_enqueue_script( 'combined-script', get_template_directory_uri() . '/js/script.js');
 	}
-	add_action( 'wp_enqueue_scripts', 'theme_styles' );
+	add_action( 'wp_footer', 'footer_script' );
 
 	add_action( 'after_switch_theme', 'indyBlog_theme_setup' );
 	add_action( 'after_setup_theme', 'indyBlog_theme_setup' );
