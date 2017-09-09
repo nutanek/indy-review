@@ -51,8 +51,8 @@
 
 }
 .headernav--lg {
-    border-top: 1px solid #c9c9c9;
-    border-bottom: 1px solid #c9c9c9;
+    border-top: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
 }
 .headernav--lg ul {
     margin-bottom: 0;
@@ -60,7 +60,7 @@
 }
 .headernav--lg ul li {
     margin: 0 10px;
-    padding: 10px 20px;
+    padding: 10px 40px 10px 0px;
     font-size: 17pt;
     font-weight: 600;
 }
@@ -80,7 +80,8 @@
     margin-left: -35px;
     margin-top: 14px;
 }
-.headernav--lg ul li.--color-0:hover {
+.headernav--lg ul li.--color-0:hover,
+.headernav--lg ul li.--color-0::before {
     color: #e74c3c;
 }
 .headernav--lg ul li.--color-1:hover,

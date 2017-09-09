@@ -32,6 +32,13 @@
   	  	}
 	}
 
+	function get_theme_config() {
+		$config = array(
+			"theme_url" => get_template_directory_uri()
+		);
+		return json_encode($config);
+	}
+
 	function get_avatar_indy_url($user_id, $size) {
 	    $avatar_url = get_avatar($user_id, $size);
 		$src = (string) reset(simplexml_import_dom(DOMDocument::loadHTML($avatar_url))->xpath("//img/@src"));
@@ -224,6 +231,8 @@
 				get_part('header'); break;
 			case 'nav-lg':
 				get_part('nav_lg'); break;
+			case 'slider':
+				get_part('slider'); break;
 			default:
 				# code...
 				break;

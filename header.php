@@ -11,8 +11,11 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 		<?php endif; ?>
 		<?php wp_head(); ?>
+		<script>
+			var indyConfig = <?php echo get_theme_config(); ?>;
+		</script>
 	</head>
 	<body ng-app="indyReview">
 		<div class="container-fluid">
-			<?php get_componet('header'); ?>
-			<?php get_componet('nav-lg'); ?>
+		<?php get_componet('header'); ?>
+		<?php get_componet('nav-lg'); ?>
