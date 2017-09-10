@@ -1,0 +1,15 @@
+<div class="postrating" ng-mouseover="isSelect()" ng-mouseleave="notSelect()">
+    <span class="badge badge-dark">4.5</span>
+    <img class="postrating__emo"
+        ng-src="{{ $root.indyConfig.theme_url + '/images/emo/1.svg' }}" >
+    <div class="postrating__selector text-center animated fadeInUp" ng-if="selecting">
+        <img ng-repeat='emo in emotion' data-toggle="tooltip" data-placement="bottom" ng-attr-title="{{emo.title[lang]}}"
+            ng-src="{{ $root.indyConfig.theme_url + '/images/emo/' + emo.img }}">
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

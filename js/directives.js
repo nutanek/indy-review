@@ -191,4 +191,12 @@ theme.directive('indyImg', ['$window', function ($window) {
             restrict: 'E',
             templateUrl: indyConfig.theme_url + "/directives/slide-loader.html"
         };
+    })
+    .directive('postRating', function () {
+        return {
+            restrict: 'E',
+            scope: true,
+            controller: 'postRating',
+            templateUrl: indyConfig.theme_url + "/directives/post-rating.html"
+        };
     });

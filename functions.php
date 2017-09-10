@@ -14,7 +14,7 @@
 	add_action( 'wp_enqueue_scripts', 'theme_styles' );
 
 	function footer_script() {
-		// wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
+		wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
 		wp_enqueue_script( 'angular-js', get_template_directory_uri() . '/js/angular.min.js');
 		wp_enqueue_script( 'controllers-js', get_template_directory_uri() . '/js/controllers.js');
 		wp_enqueue_script( 'services-js', get_template_directory_uri() . '/js/services.js');
@@ -38,8 +38,10 @@
 	}
 
 	function get_theme_config() {
+		global $theme_lang;
 		$config = array(
-			"theme_url" => get_template_directory_uri()
+			"theme_url" => get_template_directory_uri(),
+			"lang" => $theme_lang
 		);
 		return json_encode($config);
 	}
@@ -97,45 +99,6 @@
 	}
 	add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
 	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
-
-	function arphabet_widgets_init() {
-		register_sidebar( array(
-			'name'          => 'Footer Widget (indyBlog)',
-			'id'            => 'footer_widget',
-			'before_widget' => '<div>',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h2 class="rounded">',
-			'after_title'   => '</h2>',
-		) );
-	}
-	add_action( 'widgets_init', 'arphabet_widgets_init' );
-
-	class Footer_contact_widget extends WP_Widget {
-	    function __construct() {
-			 parent::__construct(false, $name = __('Footer Contact (indyBlog)'));
-	    }
-	    function form($instance) {
-			include(locate_template('template-parts/footer_contact_form.php'));
-	    }
-	    function update($new_instance, $instance) {
-			$instance['facebook_status'] = isset($new_instance['facebook_status']) ? 1 : 0;
-			$instance['facebook_url'] = trim(strip_tags($new_instance['facebook_url']));
-			$instance['twitter_status'] = isset($new_instance['twitter_status']) ? 1 : 0;
-			$instance['twitter_url'] = trim(strip_tags($new_instance['twitter_url']));
-			$instance['google_status'] = isset($new_instance['google_status']) ? 1 : 0;
-			$instance['google_url'] = trim(strip_tags($new_instance['google_url']));
-			$instance['instagram_status'] = isset($new_instance['instagram_status']) ? 1 : 0;
-			$instance['instagram_url'] = trim(strip_tags($new_instance['instagram_url']));
-    		return $instance;
-	    }
-	    function widget($args, $instance) {
-			include(locate_template('template-parts/footer_contact.php'));
-	    }
-	}
-	add_action( 'widgets_init', function() {
-		register_widget( 'Footer_contact_widget' );
-	} );
-
 
 	function set_post_views($postID) {
 		$count_key = 'post_views_count';
@@ -198,7 +161,7 @@
 					$pic = array("https://img.youtube.com/vi/".$youtube_ID."/mqdefault.jpg", 320, 180);
 				}
 			} else {
-				$pic = array(get_template_directory_uri()."/images/no-image.png", 250, 172);
+				$pic = array("", 0, 0);
 			}
 		}
 		return $pic;
@@ -230,7 +193,7 @@
 	    return $args;
 	}
 
-	function get_componet($name, $args=array()) {
+	function get_componet($name, $data=array()) {
 		switch ($name) {
 			case 'header':
 				get_part('header'); break;
@@ -239,14 +202,14 @@
 			case 'slider':
 				get_part('slider'); break;
 			case 'post-item':
-				include_part('post_item'); break;
+				include_part('post_item', $data); break;
 			default:
 				# code...
 				break;
 		}
 	}
 
-	function include_part($name, $args=array()) {
+	function include_part($name, $data=array()) {
 		$path = 'template-parts';
 		include(locate_template($path.'/'.$name.'.php'));
 	}
