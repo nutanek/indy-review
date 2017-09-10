@@ -3,8 +3,19 @@ var theme = angular.module('indyReview', []);
 theme.run(function ($rootScope) {
         $rootScope.indyConfig = indyConfig;
     })
-    .controller('header', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
+    .controller('header', ['$scope', '$rootScope', '$timeout', '$http', 'ratingServices', 
+                function ($scope, $rootScope, $timeout, $http, ratingServices) {
+            // ratingServices.get(32).then(function(data) {
+            //     console.log("11111", data);
+            // }, function(err) {
+            //     console.log("11111", err);
+            // });
 
+            // ratingServices.getAvg(32).then(function(data) {
+            //     console.log("111qqq11", data);
+            // }, function(err) {
+            //     console.log("11qqq111", err);
+            // });
     }])
     .controller('article', ['$scope', '$timeout', function ($scope, $timeout) {
         var wrap = function (el, wrapper) {

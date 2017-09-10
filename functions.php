@@ -1,4 +1,19 @@
 <?php
+	/*************** Actions ***************/
+	add_action( 'wp_enqueue_scripts', 'theme_styles' );
+	add_action( 'wp_footer', 'footer_script' );
+	add_action( 'after_switch_theme', 'indyBlog_theme_setup' );
+	add_action( 'after_setup_theme', 'indyBlog_theme_setup' );
+	add_action( 'admin_bar_menu', 'custom_toolbar_link', 40);
+	add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+	add_action( 'rest_api_init', array('IndyAPI', 'init_routes') ); 
+	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	/*************** Filter ***************/
+	add_filter( 'wp_title', 'filter_wp_title' );
+	add_filter( 'comment_form_default_fields', 'bootstrap3_comment_form_fields' );
+	add_filter( 'comment_form_defaults', 'bootstrap3_comment_form' );
+
 	function theme_styles() {
 		//include CSS file
 		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
@@ -11,7 +26,6 @@
 		wp_enqueue_script( 'popper-js', get_template_directory_uri() . '/js/popper.min.js');
 		wp_enqueue_script( 'slide-js', get_template_directory_uri() . '/js/slide.js');
 	}
-	add_action( 'wp_enqueue_scripts', 'theme_styles' );
 
 	function footer_script() {
 		wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
@@ -21,10 +35,7 @@
 		wp_enqueue_script( 'directives-js', get_template_directory_uri() . '/js/directives.js');
 		wp_enqueue_script( 'combined-script', get_template_directory_uri() . '/js/script.js');
 	}
-	add_action( 'wp_footer', 'footer_script' );
 
-	add_action( 'after_switch_theme', 'indyBlog_theme_setup' );
-	add_action( 'after_setup_theme', 'indyBlog_theme_setup' );
 	function indyBlog_theme_setup() {
 		global $theme_lang;
 		$theme_lang = get_locale();
@@ -40,8 +51,10 @@
 	function get_theme_config() {
 		global $theme_lang;
 		$config = array(
+			"site_url" => site_url(),
 			"theme_url" => get_template_directory_uri(),
-			"lang" => $theme_lang
+			"lang" => $theme_lang,
+			"api" => site_url().'/wp-json/indy-review/v1'
 		);
 		return json_encode($config);
 	}
@@ -52,7 +65,6 @@
 		return $src;
 	}
 
-	add_filter( 'wp_title', 'filter_wp_title' );
 	function filter_wp_title( $title ) {
 		global $page, $paged;
 		if ( is_feed() )
@@ -91,14 +103,11 @@
 		);
 		$wp_admin_bar->add_node($args);
 	}
-	add_action('admin_bar_menu', 'custom_toolbar_link', 40);
 
 	function custom_wp_toolbar_css_admin() {
 		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
 		wp_enqueue_style( 'theme-stylde', get_template_directory_uri() . '/css/custom-wp-toolbar-link.css');
 	}
-	add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
-	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
 
 	function set_post_views($postID) {
 		$count_key = 'post_views_count';
@@ -124,8 +133,6 @@
 	  	return $count;
 	}
 
-	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-
 	function find_youtube_ID ($post_content) {
 		$pos = strpos($post_content, "www.youtube.com/embed/");
 		if(!empty($pos))
@@ -137,16 +144,14 @@
 		if (get_post_thumbnail_id($postID)) {
 			$attachmentID = get_post_thumbnail_id($postID);
 		} else {
-			$images = get_posts(
-					array(
-							'post_type'      => 'attachment',
-							'post_mime_type' => 'image',
-							'post_parent'    => $postID,
-							'orderby'        => 'ID',
-							'order'          => 'ASC',
-							'posts_per_page' => 1,
-					)
-			);
+			$images = get_posts(array(
+				'post_type'      => 'attachment',
+				'post_mime_type' => 'image',
+				'post_parent'    => $postID,
+				'orderby'        => 'ID',
+				'order'          => 'ASC',
+				'posts_per_page' => 1,
+			));
 			$attachmentID = $images[0]->ID;
 		}
 		$pic = wp_get_attachment_image_src( $attachmentID, $size );
@@ -167,7 +172,6 @@
 		return $pic;
 	}
 
-	add_filter( 'comment_form_default_fields', 'bootstrap3_comment_form_fields' );
 	function bootstrap3_comment_form_fields( $fields ) {
 	    $commenter = wp_get_current_commenter();
 	    $req      = get_option( 'require_name_email' );
@@ -182,14 +186,12 @@
 	    return $fields;
 	}
 
-	add_filter( 'comment_form_defaults', 'bootstrap3_comment_form' );
 	function bootstrap3_comment_form( $args ) {
 	    $args['comment_field'] = '<div class="form-group comment-form-comment">
 	            <label for="comment">' . _x( 'Comment', 'noun' ) . '</label>
 	            <textarea class="form-control" id="comment" name="comment" cols="45" rows="4" aria-required="true"></textarea>
 	        </div>';
 	    $args['class_submit'] = 'btn btn-default'; // since WP 4.1
-
 	    return $args;
 	}
 
@@ -326,5 +328,78 @@
 			return false;
 		}
 		return false;
+	}
+
+
+
+
+	/***************** API *****************/
+	class IndyAPI {
+		private static $route = 'indy-review/v1';
+
+		function init_routes() {
+			self::register('/rating/(?P<post_id>\d+)', 'get_rating', 'GET');
+			self::register('/rating-avg/(?P<post_id>\d+)', 'get_rating_avg', 'GET');
+		}
+
+		static function register($path, $function, $method) {
+			register_rest_route( self::$route, $path, array(
+				'methods' => $method,
+				'callback' => array('IndyAPI', $function),
+			) );
+		}
+
+		function my_awesome_func( $data ) {
+			$posts = get_posts( array(
+				'author' => $data['id'],
+			) );
+			 
+			if ( empty( $posts ) ) {
+				return null;
+			}
+			return $posts[0]->post_title;
+		}
+	
+		function api_get_cover() {
+			$cover = get_cover_homepage();
+			return array(
+				"result" => 0,
+				"img" => $cover
+			);
+		}
+
+		function get_rating($data) {
+			$postID = $data['post_id'];
+			$rating = get_post_meta($postID, 'indyreview_rating', true);
+			
+			if ($rating != null) {
+				$rating = array_map('intval', explode(',', $rating));
+				return array(
+					"result" => 0,
+					"rating" => $rating
+				);
+			} else {
+				return array(
+					"result" => 1,
+					"msg" => "rating of post ID ".$postID." not found"
+				);
+			}
+		}
+
+		function get_rating_avg($data) {
+			$postID = $data['post_id'];
+			$ratingAvg = get_post_meta($postID, 'indyreview_rating_avg', true);
+			if ($ratingAvg != null) {
+				return array(
+					"result" => 0,
+					"rating" => floatval($ratingAvg)
+				);
+			} else {
+				return array(
+					"result" => 1,
+					"msg" => "rating avg of post ID ".$postID." not found"
+				);
+			}
+		}
 	}
 ?>

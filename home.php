@@ -31,6 +31,7 @@
                 'cat_name' => $the_cat_name,
                 'cat_url' => $catPermalink,
                 'title' => get_the_title(),
+                'post_ID' => $postid,
                 'post_time' => get_post_time('j M Y', true),
                 'post_url' => $postPermalink,
                 'content' => $content

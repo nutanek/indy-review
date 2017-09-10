@@ -11,6 +11,7 @@
             <b class="card-text font-theme" style="font-size: 20pt; line-height: 1.1em"><?php echo $data['title']; ?></b>
             <p><?php echo $data['cat_name']; ?></p>
             <p><?php echo $data['content']; ?></p>
+            <p><?php echo $data['post_ID']; ?></p>
         </div>
         <div class="card-footer">
             <div class="row">
