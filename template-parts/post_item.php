@@ -14,7 +14,7 @@
             <p><?php echo $data['post_ID']; ?></p>
         </div>
         <div class="card-footer">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-7">
                     <small class="text-muted postitem__time">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;

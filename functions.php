@@ -413,10 +413,12 @@
 				add_post_meta($postID, 'indyreview_rating', $str, 'yes');
 			}
 
+			$scores = array(0, 2.5, 5, 7.5, 10);
+
 			$set = 0;
 			$divisor = 0;
 			foreach ($rating as $key=>$value) {
-				$set += ($value * $key * 2);
+				$set += ($value * $scores[$key]);
 				$divisor += $value;
 			}
 			$ratingAvg = number_format((float)($set/$divisor), 1, '.', '');

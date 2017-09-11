@@ -198,3 +198,20 @@ img.img_effect:hover {
   .fadeInUp {
     animation-name: fadeInUp;
   }
+
+  @keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+  
+    to {
+        opacity: 0;
+        border-radius: 100%;
+        transform: translate3d(0, 100%, 0) scale3d(0,0,0);
+    }
+  }
+  
+  .fadeOutDown {
+    animation-name: fadeOutDown;
+  }

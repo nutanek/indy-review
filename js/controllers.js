@@ -46,22 +46,31 @@ theme.run(function ($rootScope) {
         });
 
     }])
-    .controller('postRating', ['$scope', '$rootScope', 'ratingServices', function ($scope, $rootScope, ratingServices) {
+    .controller('postRating', ['$scope', '$rootScope', '$timeout', 'ratingServices', function ($scope, $rootScope, $timeout, ratingServices) {
         /******************* Declarations *******************/ 
         var lang = $rootScope.indyConfig.lang;
         $scope.lang = lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
         $scope.selecting = false;
-        $scope.ratingAvg = 0;
+        $scope.ratingAvg = -1;
+        $scope.currentEmo = 2;
+        $scope.closing = false;
         $scope.emotion = [
-            { img: '5.svg', title: { en: 'Great', th: 'สุดยอด' }, score: 5 },
-            { img: '4.svg', title: { en: 'Good', th: 'ดี' }, score: 4 },
-            { img: '3.svg', title: { en: 'Okay', th: 'เฉยๆ' }, score: 3 },
+            { img: '1.svg', title: { en: 'Terrible', th: 'แย่มาก' }, score: 1 },
             { img: '2.svg', title: { en: 'Bad', th: 'แย่' }, score: 2 },
-            { img: '1.svg', title: { en: 'Terrible', th: 'แย่มาก' }, score: 1 }
+            { img: '3.svg', title: { en: 'Okay', th: 'เฉยๆ' }, score: 3 },
+            { img: '4.svg', title: { en: 'Good', th: 'ดี' }, score: 4 },
+            { img: '5.svg', title: { en: 'Great', th: 'สุดยอด' }, score: 5 }
         ];
+        var updateEmo = function() {
+            var emo = Math.abs(Math.round(($scope.ratingAvg-1)/2));
+            emo = emo == 5 ? 4 : emo;
+            $scope.currentEmo = emo;
+        }
         /******************* Loading Data *******************/ 
         ratingServices.getAvg($scope.postID).then(function(data) {
             $scope.ratingAvg = data.avg;
+            console.log($scope.postID, $scope.ratingAvg)
+            updateEmo();
         }, function(err) {
             // do noting
         });
@@ -77,9 +86,24 @@ theme.run(function ($rootScope) {
             ratingServices.push($scope.postID, score).then(function(data) {
                 if (!data.result) {
                     $scope.ratingAvg = data.data.avg
+                    updateEmo();
+                    console.log(".................")
                 }
             }, function() {
                 // do noting
             });
+            $(".tooltip").hide();
+            $scope.closing = true;
+            $timeout(function() {
+                $scope.selecting = false;
+                $scope.closing = false;
+            }, 200);
         }
     }]);
+
+
+theme.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
