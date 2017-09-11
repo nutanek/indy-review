@@ -49,7 +49,7 @@ theme.directive('indyImg', ['$window', function ($window) {
                     var hEnlarge = (hImg * wFrame) / wImg;
                     if (hEnlarge >= hFrame) {
                         var rest = hEnlarge - hFrame;
-                        var part = rest / 3;
+                        var part = rest / 2;
                         ctrl.setImgSize({
                             "marginTop": -(part) - 2 + "px",
                             "width": "100%",
@@ -195,7 +195,9 @@ theme.directive('indyImg', ['$window', function ($window) {
     .directive('postRating', function () {
         return {
             restrict: 'E',
-            scope: true,
+            scope: {
+                postID: '=postId'
+            },
             controller: 'postRating',
             templateUrl: indyConfig.theme_url + "/directives/post-rating.html"
         };

@@ -1,5 +1,5 @@
 .indy_slide {
-  background: #DDDDDD;
+  
   position: relative;
   list-style: none;
   overflow: hidden;
@@ -7,6 +7,9 @@
 }
 
 .indy_slide .item {
+  background: #DDDDDD;
+  background-size: cover;
+  background-position: center center; 
   -webkit-backface-visibility: hidden;
   position: absolute;
   display: none;

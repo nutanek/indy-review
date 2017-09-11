@@ -22,7 +22,7 @@
                     </small>
                 </div>
                 <div class="col text-right">
-                    <post-rating />
+                    <post-rating post-id="<?php echo $data['post_ID']; ?>"/>
                 </div>
             </div>
         </div>

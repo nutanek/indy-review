@@ -339,7 +339,8 @@
 
 		function init_routes() {
 			self::register('/rating/(?P<post_id>\d+)', 'get_rating', 'GET');
-			self::register('/rating-avg/(?P<post_id>\d+)', 'get_rating_avg', 'GET');
+			self::register('/rating/avg/(?P<post_id>\d+)', 'get_rating_avg', 'GET');
+			self::register('/rating/(?P<post_id>\d+)', 'push_rating', 'POST');
 		}
 
 		static function register($path, $function, $method) {
@@ -358,14 +359,6 @@
 				return null;
 			}
 			return $posts[0]->post_title;
-		}
-	
-		function api_get_cover() {
-			$cover = get_cover_homepage();
-			return array(
-				"result" => 0,
-				"img" => $cover
-			);
 		}
 
 		function get_rating($data) {
@@ -392,7 +385,7 @@
 			if ($ratingAvg != null) {
 				return array(
 					"result" => 0,
-					"rating" => floatval($ratingAvg)
+					"avg" => floatval($ratingAvg)
 				);
 			} else {
 				return array(
@@ -400,6 +393,43 @@
 					"msg" => "rating avg of post ID ".$postID." not found"
 				);
 			}
+		}
+
+		function push_rating($data) {
+			$postID = $data['post_id'];
+			$score = $data['score'];
+			$rating = get_post_meta($postID, 'indyreview_rating', true);
+
+			if ($rating != null) {
+				$rating = array_map('intval', explode(',', $rating));
+				$rating[$score-1] += 1;
+				$str = implode(",", $rating); 
+				update_post_meta($postID, 'indyreview_rating', $str);
+			} else {
+				$rating = array(0,0,0,0,0);
+				$rating[$score-1] += 1;
+				$str = implode(",", $rating); 
+				// delete_option($optionName);
+				add_post_meta($postID, 'indyreview_rating', $str, 'yes');
+			}
+
+			$set = 0;
+			$divisor = 0;
+			foreach ($rating as $key=>$value) {
+				$set += ($value * $key * 2);
+				$divisor += $value;
+			}
+			$ratingAvg = number_format((float)($set/$divisor), 1, '.', '');
+			update_post_meta($postID, 'indyreview_rating_avg', $ratingAvg);
+			
+			return array(
+				"result" => 0,
+				"data" => array(
+					"rating" => $rating,
+					"avg" => floatval($ratingAvg)
+				)
+			);
+			
 		}
 	}
 ?>

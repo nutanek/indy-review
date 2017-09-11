@@ -46,54 +46,25 @@ theme.run(function ($rootScope) {
         });
 
     }])
-    .controller('postRating', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
+    .controller('postRating', ['$scope', '$rootScope', 'ratingServices', function ($scope, $rootScope, ratingServices) {
         /******************* Declarations *******************/ 
         var lang = $rootScope.indyConfig.lang;
         $scope.lang = lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
         $scope.selecting = false;
+        $scope.ratingAvg = 0;
         $scope.emotion = [
-            {
-                img: '5.svg',
-                title: {
-                    en: 'Great',
-                    th: 'สุดยอด'
-                },
-                score: 5
-            },
-            {
-                img: '4.svg',
-                title: {
-                    en: 'Good',
-                    th: 'ดี'
-                },
-                score: 4
-            },
-            {
-                img: '3.svg',
-                title: {
-                    en: 'Okay',
-                    th: 'เฉยๆ'
-                },
-                score: 3
-            },
-            {
-                img: '2.svg',
-                title: {
-                    en: 'Bad',
-                    th: 'แย่'
-                },
-                score: 2
-            },
-            {
-                img: '1.svg',
-                title: {
-                    en: 'Terrible',
-                    th: 'แย่มาก'
-                },
-                score: 1
-            }
+            { img: '5.svg', title: { en: 'Great', th: 'สุดยอด' }, score: 5 },
+            { img: '4.svg', title: { en: 'Good', th: 'ดี' }, score: 4 },
+            { img: '3.svg', title: { en: 'Okay', th: 'เฉยๆ' }, score: 3 },
+            { img: '2.svg', title: { en: 'Bad', th: 'แย่' }, score: 2 },
+            { img: '1.svg', title: { en: 'Terrible', th: 'แย่มาก' }, score: 1 }
         ];
-
+        /******************* Loading Data *******************/ 
+        ratingServices.getAvg($scope.postID).then(function(data) {
+            $scope.ratingAvg = data.avg;
+        }, function(err) {
+            // do noting
+        });
         /******************* Functions *******************/ 
         $scope.isSelect = function() {
             $scope.selecting = true;
@@ -101,5 +72,14 @@ theme.run(function ($rootScope) {
         }
         $scope.notSelect = function() {
             $scope.selecting = false;
+        }
+        $scope.pushRating = function(score) {
+            ratingServices.push($scope.postID, score).then(function(data) {
+                if (!data.result) {
+                    $scope.ratingAvg = data.data.avg
+                }
+            }, function() {
+                // do noting
+            });
         }
     }]);
