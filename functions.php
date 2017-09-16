@@ -205,6 +205,8 @@
 				get_part('slider'); break;
 			case 'post-item':
 				include_part('post_item', $data); break;
+			case 'posts':
+				include_part('posts', $data); break;
 			default:
 				# code...
 				break;
@@ -328,6 +330,14 @@
 			return false;
 		}
 		return false;
+	}
+	
+	function add3dots($string, $repl, $limit) {
+		if(strlen($string) > $limit) {
+			return mb_substr($string, 0, $limit) . $repl; 
+		} else {
+			return $string;
+		}
 	}
 
 

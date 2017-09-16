@@ -23,7 +23,8 @@ $(document).ready(function () {
         $container.masonry({
             itemSelector: ".grid-item",
             layoutMode: 'masonry',
-            transitionDuration: '0.5s'
+            transitionDuration: '0.5s',
+            // horizontalOrder: true
         });
     });
 });

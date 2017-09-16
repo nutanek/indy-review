@@ -87,7 +87,6 @@ theme.run(function ($rootScope) {
                 if (!data.result) {
                     $scope.ratingAvg = data.data.avg
                     updateEmo();
-                    console.log(".................")
                 }
             }, function() {
                 // do noting

@@ -1,17 +1,26 @@
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 postitem grid-item">
     <div class="col card no-padding">
         <?php if ($data['image']) : ?>
-        <a href="<?php echo $data['post_url']; ?>">
+        <a href="<?php echo $data['post_url']; ?>" target="_blank">
             <div style="overflow: hidden">
                 <img class="card-img-top img_effect" src="<?php echo $data['image']; ?>">
             </div>
         </a>
         <?php endif; ?>
         <div class="card-body">
-            <b class="card-text font-theme" style="font-size: 20pt; line-height: 1.1em"><?php echo $data['title']; ?></b>
-            <p><?php echo $data['cat_name']; ?></p>
-            <p><?php echo $data['content']; ?></p>
-            <p><?php echo $data['post_ID']; ?></p>
+            <div class="postitem__category">
+                <?php foreach($data['category'] as $cat) : ?>
+                <a href="<?php echo $cat['url']; ?>">
+                    <div class="item item--color-<?php echo ($cat['id']%5) ?>">
+                        <?php echo $cat['name']; ?>
+                    </div>
+                </a>
+                <?php endforeach; ?>
+            </div>
+            <a href="<?php echo $data['post_url']; ?>" target="_blank">
+                <h2 class="card-text postitem__title font-theme"><?php echo $data['title']; ?></h2>
+            </a>
+            <p class="postitem__description"><?php echo $data['content']; ?></p>
         </div>
         <div class="card-footer">
             <div class="row align-items-center">
