@@ -65,4 +65,28 @@ theme.factory('ratingServices', ['$http', '$q', '$rootScope', function($http, $q
             return deferred.promise;        
         }
     };
+}])
+.factory('postsServices', ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
+    return {        
+        get: function(catID, orderBy, page) {            
+            var deferred = $q.defer();   
+            var path = $rootScope.indyConfig.api;
+            $http({
+                method: 'GET',
+                url: path + '/posts/' + catID + '/' + orderBy + '/' + page,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function(res) {
+                if (typeof res.data !== "undefined" && res.data.result === 0) {
+                    deferred.resolve(res.data);
+                } else {
+                    deferred.resolve(res.data);
+                }
+            }, function(err) {
+                deferred.reject(err);
+            });       
+            return deferred.promise;        
+        }
+    };
 }]);

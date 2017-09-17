@@ -30,7 +30,6 @@ theme.directive('indyImg', ['$window', function ($window) {
                     var wFrame = element[0].offsetWidth;
                     var hFrame = element[0].offsetHeight;
                     scope.hFrame = hFrame;
-                    console.log(hFrame)
 
                     var wrapHeight = element[0].attributes["wrap-height"];
                     if (wrapHeight) {
@@ -200,5 +199,26 @@ theme.directive('indyImg', ['$window', function ($window) {
             },
             controller: 'postRating',
             templateUrl: indyConfig.theme_url + "/directives/post-rating.html"
+        };
+    })
+    .directive('postItem', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                options: '='
+            },
+            controller: 'postItem',
+            templateUrl: indyConfig.theme_url + "/directives/post-item.html"
+        };
+    })
+    .directive('sortSelector', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                sortBy: '&'
+            },
+            controller: 'sortSelector',
+            templateUrl: indyConfig.theme_url + "/directives/sort-selector.html"
         };
     });

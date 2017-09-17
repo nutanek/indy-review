@@ -1,4 +1,4 @@
-var theme = angular.module('indyReview', []);
+var theme = angular.module('indyReview', ['masonry']);
 
 theme.run(function ($rootScope) {
         $rootScope.indyConfig = indyConfig;
@@ -69,7 +69,6 @@ theme.run(function ($rootScope) {
         /******************* Loading Data *******************/ 
         ratingServices.getAvg($scope.postID).then(function(data) {
             $scope.ratingAvg = data.avg;
-            console.log($scope.postID, $scope.ratingAvg)
             updateEmo();
         }, function(err) {
             // do noting
@@ -98,6 +97,81 @@ theme.run(function ($rootScope) {
                 $scope.closing = false;
             }, 200);
         }
+    }])
+    .controller('postsController', ['$scope', '$rootScope', '$timeout', '$compile', '$element', 'postsServices', 
+            function ($scope, $rootScope, $timeout, $compile, $element, postsServices) {
+        var currentPage = 1;
+        var category = 'all';
+        var orderBy = 'new';
+        $scope.isLoading = false;
+        $scope.showLoadMore = true;
+        $scope.showContent = true;
+
+        $scope.loadMore = function() {
+            currentPage++;
+            $scope.isLoading = true;
+            postsServices.get(category, orderBy, currentPage).then(function(posts) {
+                $scope.showContent = true; 
+                if (!posts.result) {
+                    var newScope = $scope.$new(true);
+                    newScope.posts = posts.data;
+                    var el = $compile("<post-item ng-repeat='post in posts' options='post'></post-item>")(newScope);
+                    $element.find('.posts__body').append(el);
+                    $timeout(function() {
+                        $scope.isLoading = false;                              
+                    }, 1000);
+                } else {
+                    $scope.isLoading = false;  
+                    $scope.showLoadMore = false;
+                }
+            }, function() {
+                $scope.isLoading = false;
+                $scope.showContent = true;  
+            });
+        };
+
+        $scope.sortBy = function(option) {
+            if (option == 2) {
+                orderBy = 'score';
+            } else {
+                orderBy = 'new';                
+            }
+            currentPage = 0;
+            $scope.isLoading = true;
+            $scope.showContent = false;
+            $scope.showLoadMore = true;
+            $element.find('.posts__body').empty();
+            $scope.loadMore();
+        };
+    }])
+    .controller('postItem', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
+        // console.log($scope.options);
+    }])
+    .controller('sortSelector', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        var lang = $rootScope.indyConfig.lang;
+        $scope.lang = lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
+        $scope.currentOption = 1;
+        $scope.text = {
+            lastest: {
+                en: 'Lastest',
+                th: 'ใหม่ล่าสุด'
+            },
+            top_score: {
+                en: 'Top Score',
+                th: 'คะแนนสูงสุด'
+            },
+            sort_by: {
+                en: 'sort by',
+                th: 'เรียงตาม'
+            }
+        }
+
+        $scope.select = function(option) {
+            $scope.currentOption = option;
+            $scope.sortBy({
+                option: option
+            });
+        };
     }]);
 
 
@@ -105,4 +179,9 @@ theme.filter('reverse', function() {
     return function(items) {
         return items.slice().reverse();
     };
+})
+.filter('html', function($sce){
+    return function(input){
+        return $sce.trustAsHtml(input);
+    }
 });

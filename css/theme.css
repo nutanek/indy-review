@@ -42,43 +42,6 @@ img.img_effect:hover {
     transform: scale(1.15);
 }
 
-.animated {
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        border-radius: 100%;
-        transform: translate3d(0, 100%, 0) scale3d(0, 0, 0);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-.fadeInUp {
-    animation-name: fadeInUp;
-}
-
-@keyframes fadeOutDown {
-    from {
-        opacity: 1;
-        transform: none;
-    }
-    to {
-        opacity: 0;
-        border-radius: 100%;
-        transform: translate3d(0, 100%, 0) scale3d(0, 0, 0);
-    }
-}
-
-.fadeOutDown {
-    animation-name: fadeOutDown;
-}
-
 
 /****************** Header ******************/
 
@@ -157,6 +120,31 @@ img.img_effect:hover {
 .headernav--lg ul li.--color-4:hover,
 .headernav--lg ul li.--color-4::before {
     color: #9b59b6;
+}
+
+/****************** Post Item ******************/
+
+.posts__sortby {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.posts__sortby button:hover {
+    cursor: pointer;
+}
+
+.posts__loader {
+    height: 120px;
+}
+
+.posts__loadmore button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 100px;
 }
 
 
@@ -295,4 +283,44 @@ img.img_effect:hover {
     top: 0;
     left: 0;
     background: rgba(99, 99, 99, 0.6);
+}
+
+
+/****************** Animation ******************/
+
+.animated {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        border-radius: 100%;
+        transform: translate3d(0, 100%, 0) scale3d(0, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+    to {
+        opacity: 0;
+        border-radius: 100%;
+        transform: translate3d(0, 100%, 0) scale3d(0, 0, 0);
+    }
+}
+
+.fadeOutDown {
+    animation-name: fadeOutDown;
 }

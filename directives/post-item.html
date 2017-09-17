@@ -1,0 +1,38 @@
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 postitem tile"  masonry-tile>
+    <div class="col card no-padding">
+            <a ng-if="options.image" ng-href="{{options.post_url}}" target="_blank">
+                <div style="overflow: hidden">
+                    <img class="card-img-top img_effect" ng-src="{{options.image}}">
+                </div>
+            </a>
+
+        <div class="card-body">
+            <div class="postitem__category">
+                <a ng-repeat="cat in options.category" ng-href="{{cat.url}}">
+                    <div class="item item--color-{{cat.id%5}}">
+                        <span ng-bind-html="cat.name | html"></span>
+                    </div>
+                </a>
+            </div>
+            <a ng-href="{{options.post_url}}" target="_blank">
+                <h2 class="card-text postitem__title font-theme" 
+                    ng-bind-html="options.title | html">
+                </h2>
+            </a>
+            <p class="postitem__description" ng-bind-html="options.content | html"></p>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col-7">
+                    <small class="text-muted postitem__time">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
+                        {{options.post_time}}
+                    </small>
+                </div>
+                <div class="col text-right">
+                    <post-rating post-id="options.post_ID" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

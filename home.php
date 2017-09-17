@@ -6,7 +6,7 @@
         <?php 
             get_componet('posts', array(
                 'category' => 'all',
-                'orderBy' => 'score',
+                'orderBy' => 'new',
             )); 
         ?>
     </div>

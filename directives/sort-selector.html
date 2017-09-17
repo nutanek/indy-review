@@ -1,0 +1,17 @@
+<div class="posts__sortby">
+    <strong>{{text.sort_by[lang]}}: </strong>
+    <div class="btn-group">
+        <button type="button" 
+            class="btn btn-sm" 
+            ng-class="currentOption==1 ? 'btn-info' : 'btn-outline-info'"
+            ng-click="select(1)">
+            {{text.lastest[lang]}}
+        </button>
+        <button type="button" 
+            class="btn btn-sm" 
+            ng-class="currentOption==2 ? 'btn-info' : 'btn-outline-info'"
+            ng-click="select(2)">
+            {{text.top_score[lang]}}
+        </button>
+    </div>
+</div>

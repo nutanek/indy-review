@@ -30,6 +30,8 @@
 	function footer_script() {
 		wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js');
 		wp_enqueue_script( 'angular-js', get_template_directory_uri() . '/js/angular.min.js');
+		wp_enqueue_script( 'masonry-js', get_template_directory_uri() . '/js/masonry.js');
+
 		wp_enqueue_script( 'controllers-js', get_template_directory_uri() . '/js/controllers.js');
 		wp_enqueue_script( 'services-js', get_template_directory_uri() . '/js/services.js');
 		wp_enqueue_script( 'directives-js', get_template_directory_uri() . '/js/directives.js');
@@ -351,6 +353,7 @@
 			self::register('/rating/(?P<post_id>\d+)', 'get_rating', 'GET');
 			self::register('/rating/avg/(?P<post_id>\d+)', 'get_rating_avg', 'GET');
 			self::register('/rating/(?P<post_id>\d+)', 'push_rating', 'POST');
+			self::register('/posts/(?P<cat_id>([a-z0-9]+))/(?P<order_by>([a-z]+))/(?P<page>\d+)', 'get_posts', 'GET');
 		}
 
 		static function register($path, $function, $method) {
@@ -358,17 +361,6 @@
 				'methods' => $method,
 				'callback' => array('IndyAPI', $function),
 			) );
-		}
-
-		function my_awesome_func( $data ) {
-			$posts = get_posts( array(
-				'author' => $data['id'],
-			) );
-			 
-			if ( empty( $posts ) ) {
-				return null;
-			}
-			return $posts[0]->post_title;
 		}
 
 		function get_rating($data) {
@@ -441,7 +433,76 @@
 					"avg" => floatval($ratingAvg)
 				)
 			);
+		}
+
+		function get_posts($data) {
+			$catID = $data['cat_id'];
+			$orderBy = $data['order_by'];
+			$page = $data['page'];
 			
+			$options = array(
+				'posts_per_page' => get_option('posts_per_page'),
+				'paged' => $page
+			);
+			if ($catID !== 'all') {
+				$options['cat'] = $catID;
+			}
+			if ($orderBy == 'score') {
+				$options['orderby'] = 'meta_value';
+				$options['meta_query'] = array(
+					'relation' => 'OR',
+					array(
+						'key' => 'indyreview_rating_avg',
+						'compare' => 'NOT EXISTS'
+					),
+					array(
+						'key' => 'indyreview_rating_avg',
+						'type' => 'numeric'
+					)
+				);
+			}
+			$the_query = new WP_Query($options);
+
+			if ( $the_query->have_posts() ) {
+				$posts = array();
+				while ( $the_query->have_posts() ) {
+					$the_query->the_post();
+					$postid = get_the_ID();
+					$img = get_post_image_url( $postid, "medium" );
+					$category_detail = get_the_category();
+					$postPermalink = esc_url( get_permalink($postid) );
+					$category = array();
+					foreach($category_detail as $key=>$value) {
+						array_push($category, array(
+							'id' => $value->cat_ID,
+							'name' => $value->cat_name,
+							'url' => esc_url(get_category_link($value->cat_ID))
+						));
+					}
+					$content = wp_strip_all_tags(get_the_content());
+					$content = preg_replace("/&nbsp;/",'', add3dots($content, '...', 120));
+
+					array_push($posts, array(
+						'image' => $img[0],
+						'category' => $category,
+						'title' => get_the_title(),
+						'post_ID' => $postid,
+						'post_time' => get_post_time('j M Y', true),
+						'post_url' => $postPermalink,
+						'content' => $content
+					));
+				}
+				return array(
+					"result" => 0,
+					"data" => $posts
+				);
+			} else {
+				return array(
+					"result" => 1,
+					"msg" => "posts not found"
+				);
+			}
+		
 		}
 	}
 ?>
