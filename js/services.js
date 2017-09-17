@@ -68,15 +68,29 @@ theme.factory('ratingServices', ['$http', '$q', '$rootScope', function($http, $q
 }])
 .factory('postsServices', ['$http', '$q', '$rootScope', function($http, $q, $rootScope) {
     return {        
-        get: function(catID, orderBy, page) {            
+        get: function(options) {            
             var deferred = $q.defer();   
             var path = $rootScope.indyConfig.api;
+            console.log({
+                catID: options.catID, 
+                orderBy: options.orderBy, 
+                page: options.page,
+                tag: options.tag,
+                search: options.search
+            })
             $http({
-                method: 'GET',
-                url: path + '/posts/' + catID + '/' + orderBy + '/' + page,
+                method: 'POST',
+                url: path + '/posts',
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                data: JSON.stringify({
+                    catID: options.catID, 
+                    orderBy: options.orderBy, 
+                    page: options.page,
+                    tag: options.tag,
+                    search: options.search
+                })
             }).then(function(res) {
                 if (typeof res.data !== "undefined" && res.data.result === 0) {
                     deferred.resolve(res.data);

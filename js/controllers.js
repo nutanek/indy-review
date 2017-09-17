@@ -110,8 +110,17 @@ theme.run(function ($rootScope) {
         $scope.loadMore = function() {
             currentPage++;
             $scope.isLoading = true;
-            postsServices.get(category, orderBy, currentPage).then(function(posts) {
+            var options = {
+                catID: $scope.extension.catID || category, 
+                orderBy: orderBy, 
+                page: currentPage,
+                tag: $scope.extension.tag || undefined,
+                search: $scope.extension.search || undefined
+            };
+            // console.log(options)
+            postsServices.get(options).then(function(posts) {
                 $scope.showContent = true; 
+                console.log(posts)
                 if (!posts.result) {
                     var newScope = $scope.$new(true);
                     newScope.posts = posts.data;

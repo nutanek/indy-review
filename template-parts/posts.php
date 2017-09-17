@@ -1,77 +1,65 @@
-<div ng-controller="postsController">
+<?php 
+    $the_query = gen_query_post(array(
+        'catID' => $data['category'],
+        'orderBy' => 'new',
+        'page' => 1,
+        'tag' => $data['tag'],
+        'search' => $data['search'],
+    ));
+?>
+<div ng-controller="postsController" 
+    ng-init="
+        extension = {
+            tag: '<?php echo $data['tag']; ?>',
+            search: '<?php echo $data['search']; ?>',
+            catID: <?php echo $data['category']; ?> }">
+  
     <div class="row">
+        <div class="col">
+            ssssss
+        </div>
+        <?php if ( $the_query->have_posts() ) : ?>
         <div class="col text-right">
             <sort-selector sort-by="sortBy(option)"></sort-selector>
         </div>
-    </div>
-    <div class="row posts__body" ng-show="showContent" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
-        <?php 
-            $options = array(
-                'posts_per_page' => get_option('posts_per_page'),
-                'paged' => 1
-            );
-            if ($data['category'] !== 'all') {
-                $options['cat'] = $data['category'];
-            }
-            if ($data['orderBy'] == 'score') {
-                $options['orderby'] = 'meta_value';
-                $options['meta_query'] = array(
-                    'relation' => 'OR',
-                    array(
-                        'key' => 'indyreview_rating_avg',
-                        'compare' => 'NOT EXISTS'
-                    ),
-                    array(
-                        'key' => 'indyreview_rating_avg',
-                        'type' => 'numeric'
-                    )
-                );
-            }
-            $the_query = new WP_Query($options);
-        ?>
-
-        <?php if ( $the_query->have_posts() ) :
-            while ( $the_query->have_posts() ) :
-                $the_query->the_post();
-                $postid = get_the_ID();
-                $img = get_post_image_url( $postid, "medium" );
-                $category_detail = get_the_category();
-                $postPermalink = esc_url( get_permalink($postid) );
-                $category = array();
-                foreach($category_detail as $key=>$value) {
-                    array_push($category, array(
-                        'id' => $value->cat_ID,
-                        'name' => $value->cat_name,
-                        'url' => esc_url(get_category_link($value->cat_ID))
-                    ));
-                }
-                $content = wp_strip_all_tags(get_the_content());
-                $content = preg_replace("/&nbsp;/",'', add3dots($content, '...', 120));
-        ?>        
-        <?php 
-            get_componet('post-item', array(
-                'image' => $img[0],
-                'category' => $category,
-                'title' => get_the_title(),
-                'post_ID' => $postid,
-                'post_time' => get_post_time('j M Y', true),
-                'post_url' => $postPermalink,
-                'content' => $content
-            )); 
-        ?>
-        <?php endwhile; else: ?>
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
-                </div>
-            </div>
         <?php endif; ?>
     </div>
+    
+    <?php if ( $the_query->have_posts() ) : ?>
+        <div class="row posts__body" ng-show="showContent" 
+            masonry='{ 
+                "transitionDuration" : "0.4s" , 
+                "itemSelector" : ".tile"}'>
+            <?php
+                $postTotal = $the_query->post_count;
+                while ($the_query->have_posts()) :
+                    $the_query->the_post();
+                    $postid = get_the_ID();
+                    get_componet('post-item', array(
+                        'post_ID' => $postid,
+                        'title' => get_the_title(),
+                        'image' => get_post_image_url($postid, "medium")[0],
+                        'post_time' => get_post_time('j M Y', true),
+                        'post_url' => esc_url(get_permalink($postid)),
+                        'content' => gen_summary(get_the_content(), 120),
+                        'category' => gen_category_detail(get_the_category())
+                    ));
+                endwhile;
+            ?>
+        </div>
+    <?php else: ?>
+        <div class="col posts__empty text-center">
+            <?php _e('Sorry, no posts matched your criteria.'); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="row posts__loader align-items-center" ng-show="isLoading">
         <div class="col text-center">
             <slide-loader/>
         </div>
     </div>
+    
+    <?php if ($postTotal >= get_option('posts_per_page')) : ?>
     <div class="row posts__loadmore font-theme" ng-show="showLoadMore">
         <div class="col text-center">
             <button class="btn btn-lg btn-info" ng-click="loadMore()" >
@@ -80,4 +68,5 @@
             </button>
         </div>
     </div>
+    <?php endif; ?>
 </div>
