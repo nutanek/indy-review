@@ -8,7 +8,7 @@
         </a>
         <?php endif; ?>
         <div class="card-body">
-            <div class="postitem__category">
+            <div class="postitem__category category__tag">
                 <?php foreach($data['category'] as $cat) : ?>
                 <a href="<?php echo $cat['url']; ?>">
                     <div class="item item--color-<?php echo ($cat['id']%5) ?>">

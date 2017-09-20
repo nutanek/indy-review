@@ -1,4 +1,4 @@
-<div class="postrating" ng-mouseover="isSelect()" ng-mouseleave="notSelect()">
+<div class="postrating" ng-right-click ng-mouseover="isSelect()" ng-mouseleave="notSelect()">
     <span class="badge badge-dark" ng-show="ratingAvg!=-1">{{ratingAvg}}</span>
     <img class="postrating__emo"
         ng-src="{{ $root.indyConfig.theme_url + '/images/emo/' + emotion[currentEmo].img }}" >
@@ -6,7 +6,7 @@
         ng-class="closing ? 'fadeOutDown' : 'fadeInUp'"
         ng-if="selecting">
         <img ng-repeat="emo in emotion | reverse" ng-click="pushRating(emo.score)"
-            data-toggle="tooltip" data-placement="bottom" ng-attr-title="{{emo.title[lang]}}"
+            data-toggle="tooltip" data-placement="bottom" ng-attr-title="{{emo.title}}"
             ng-src="{{ $root.indyConfig.theme_url + '/images/emo/' + emo.img }}">
     </div>
 </div>

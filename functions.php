@@ -21,6 +21,7 @@
 		wp_enqueue_style( 'slide-css', get_template_directory_uri() . '/css/slide.css');
 		wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/css/theme.css');
 		//include JS file
+		wp_enqueue_script( 'locale-js', get_template_directory_uri() . '/js/locale.js');
 		wp_enqueue_script( 'jquery-js', get_template_directory_uri() . '/js/jquery.min.js');
 		wp_enqueue_script( 'slide-js', get_template_directory_uri() . '/js/slide.js');
 	}

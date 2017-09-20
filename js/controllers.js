@@ -30,7 +30,7 @@ theme.run(function ($rootScope) {
             } else if (img[0].classList.value.indexOf("alignright") !== -1) {
                 img[0].style.marginLeft = "auto";
             }
-            img.addClass('img-responsive');
+            img.addClass('img-fluid');
         });
 
         angular.forEach(angular.element(document.querySelectorAll('.article__content div[id^=attachment]')), function (value, key) {
@@ -48,18 +48,17 @@ theme.run(function ($rootScope) {
     }])
     .controller('postRating', ['$scope', '$rootScope', '$timeout', 'ratingServices', function ($scope, $rootScope, $timeout, ratingServices) {
         /******************* Declarations *******************/ 
-        var lang = $rootScope.indyConfig.lang;
-        $scope.lang = lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
+        var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
         $scope.selecting = false;
         $scope.ratingAvg = -1;
         $scope.currentEmo = 2;
         $scope.closing = false;
         $scope.emotion = [
-            { img: '1.svg', title: { en: 'Terrible', th: 'แย่มาก' }, score: 1 },
-            { img: '2.svg', title: { en: 'Bad', th: 'แย่' }, score: 2 },
-            { img: '3.svg', title: { en: 'Okay', th: 'เฉยๆ' }, score: 3 },
-            { img: '4.svg', title: { en: 'Good', th: 'ดี' }, score: 4 },
-            { img: '5.svg', title: { en: 'Great', th: 'สุดยอด' }, score: 5 }
+            { img: '1.svg', title: locale[lang].__rating_terrible , score: 1 },
+            { img: '2.svg', title: locale[lang].__rating_bad, score: 2 },
+            { img: '3.svg', title: locale[lang].__rating_okay, score: 3 },
+            { img: '4.svg', title: locale[lang].__rating_good, score: 4 },
+            { img: '5.svg', title: locale[lang].__rating_great, score: 5 }
         ];
         var updateEmo = function() {
             var emo = Math.abs(Math.round(($scope.ratingAvg-1)/2));
@@ -157,22 +156,12 @@ theme.run(function ($rootScope) {
         // console.log($scope.options);
     }])
     .controller('sortSelector', ['$scope', '$rootScope', function ($scope, $rootScope) {
-        var lang = $rootScope.indyConfig.lang;
-        $scope.lang = lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
+        var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
         $scope.currentOption = 1;
         $scope.text = {
-            lastest: {
-                en: 'Lastest',
-                th: 'ใหม่ล่าสุด'
-            },
-            top_score: {
-                en: 'Top Score',
-                th: 'คะแนนสูงสุด'
-            },
-            sort_by: {
-                en: 'sort by',
-                th: 'เรียงตาม'
-            }
+            lastest: locale[lang].__sort_lastest,
+            top_score: locale[lang].__sort_top_score,
+            sort_by: locale[lang].__sort_sort_by
         }
 
         $scope.select = function(option) {

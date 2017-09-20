@@ -7,7 +7,7 @@
             </a>
 
         <div class="card-body">
-            <div class="postitem__category">
+            <div class="postitem__category category__tag">
                 <a ng-repeat="cat in options.category" ng-href="{{cat.url}}">
                     <div class="item item--color-{{cat.id%5}}">
                         <span ng-bind-html="cat.name | html"></span>

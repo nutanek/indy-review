@@ -190,30 +190,6 @@ img.img_effect:hover {
     float: left;
 }
 
-.postitem__category .item:hover {
-    opacity: 0.8;
-}
-
-.postitem__category .item--color-0 {
-    background-color: #e74c3c;
-}
-
-.postitem__category .item--color-1 {
-    background-color: #F1B126;
-}
-
-.postitem__category .item--color-2 {
-    background-color: #1abc9c;
-}
-
-.postitem__category .item--color-3 {
-    background-color: #3498db;
-}
-
-.postitem__category .item--color-4 {
-    background-color: #9b59b6;
-}
-
 .postitem__title {
     color: #000000;
     font-size: 1.7em;
@@ -335,4 +311,86 @@ img.img_effect:hover {
 
 .fadeOutDown {
     animation-name: fadeOutDown;
+}
+
+/****************** Category ******************/
+
+.category__tag .item:hover {
+    opacity: 0.8;
+}
+
+.category__tag .item--color-0 {
+    background-color: #e74c3c;
+}
+
+.category__tag .item--color-1 {
+    background-color: #F1B126;
+}
+
+.category__tag .item--color-2 {
+    background-color: #1abc9c;
+}
+
+.category__tag .item--color-3 {
+    background-color: #3498db;
+}
+
+.category__tag .item--color-4 {
+    background-color: #9b59b6;
+}
+
+/****************** Article ******************/
+
+.article {
+
+}
+
+.article__header {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.article__header h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow:
+    3px 3px 3px #000,
+  -1px -1px 3px #000,  
+   1px -1px 3px #000,
+   -1px 1px 3px #000,
+    1px 1px 3px #000;
+}
+
+.article__category {
+    display: inline-block;
+}
+
+.article__category .item {
+    margin: 10px 6px 0px;
+    padding: 8px 15px;
+    border-radius: 100px;
+    font-size: 0.9em;
+    color: #FFFFFF;
+    float: left;
+}
+
+.article .frame {
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+@media (max-width: 768px) {
+    .article .frame {
+        margin-top: 0; 
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+.article__content {
+    font-size: 1em;
+    line-height: 2.2em;
 }

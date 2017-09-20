@@ -16,7 +16,7 @@
   
     <div class="row">
         <div class="col">
-            ssssss
+            <!-- ssssss -->
         </div>
         <?php if ( $the_query->have_posts() ) : ?>
         <div class="col text-right">
