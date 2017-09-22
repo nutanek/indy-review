@@ -1,8 +1,15 @@
-var theme = angular.module('indyReview', ['masonry']);
+var theme = angular.module('indyReview', ['masonry', 'ngCookies']);
 
 theme.run(function ($rootScope) {
         $rootScope.indyConfig = indyConfig;
     })
+    .config(['$cookiesProvider', function($cookiesProvider) {
+        // Set $cookies defaults
+        $cookiesProvider.defaults.path = '/'; 
+        // $cookiesProvider.defaults.secure = true;
+        // $cookiesProvider.defaults.expires = exp_date;
+        // $cookiesProvider.defaults.domain = 'https://www.indytheme.com';
+    }])
     .controller('header', ['$scope', '$rootScope', '$timeout', '$http', 'ratingServices', 
                 function ($scope, $rootScope, $timeout, $http, ratingServices) {
             // ratingServices.get(32).then(function(data) {
@@ -168,6 +175,83 @@ theme.run(function ($rootScope) {
             $scope.currentOption = option;
             $scope.sortBy({
                 option: option
+            });
+        };
+    }])
+    .controller('contentRating', ['$scope', '$rootScope', 'ratingServices', '$cookies', 
+        function ($scope, $rootScope, ratingServices, $cookies) {
+        var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
+        $scope.emotion = [
+            { img: '1.svg', title: locale[lang].__rating_terrible , score: 1, color: '#e74c3c' },
+            { img: '2.svg', title: locale[lang].__rating_bad, score: 2, color: '#e67e22' },
+            { img: '3.svg', title: locale[lang].__rating_okay, score: 3, color: '#f1c40f' },
+            { img: '4.svg', title: locale[lang].__rating_good, score: 4, color: '#2ecc71' },
+            { img: '5.svg', title: locale[lang].__rating_great, score: 5, color: '#3498db' }
+        ];
+        $scope.numVoters = 0;
+        $scope.ratingAvg = 0;
+
+        console.log("$cookieStore.get('obj')", $cookies.getObject('indy_review'))
+        
+        var getRatingScore = function() {
+            ratingServices.get($scope.postId).then(function(data) {
+                if (!data.result) {
+                    data.rating.map(function(score, index) {
+                        $scope.emotion[index].rating = score;
+                    });
+                    $scope.numVoters = data.rating.reduce(function(total, num) {
+                        return total + num; 
+                    });
+                }
+                console.log($scope.emotion)
+            }, function(err) {
+                // do noting
+            });
+        };
+
+        var getRatingAvg = function() {
+            ratingServices.getAvg($scope.postId).then(function(data) {
+                if (!data.result) {
+                    $scope.ratingAvg = data.avg;
+                }
+            }, function(err) {
+                // do noting
+            });
+        };
+
+        getRatingScore();
+        getRatingAvg();
+
+        $scope.bindingTooltip = function() {
+            $('[data-toggle="tooltip"]').tooltip();   
+        };
+
+        $scope.pushRating = function(score) {
+            ratingServices.push($scope.postId, score).then(function(data) {
+                if (!data.result) {
+                    var someSessionObj = 1;
+                    var posts = $cookies.getObject('indy_review') || [];
+                    posts.push($scope.postId);
+                    $cookies.putObject('indy_review', posts, { path: '/'});
+
+                    $scope.ratingAvg = data.data.avg
+                    getRatingScore();
+                }
+            }, function() {
+                // do noting
+            });
+        };
+    }])
+    .controller('contentRatingItem', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
+        
+        $scope.isSelect = function() {
+             $('[data-toggle="tooltip"]').tooltip();           
+        };
+        
+        $scope.vote = function() {
+            console.log('ssssssssss')
+            $scope.pushRating({
+                score: $scope.emo.score
             });
         };
     }]);

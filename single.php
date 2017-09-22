@@ -41,7 +41,7 @@
 			<div class="col frame">
 				<div class="card">
 					<div class="card-body">
-					sdsd
+						<content-rating post-id="<?php echo $post_ID; ?>"></content-rating>
 					</div>
 				</div>
 			</div>

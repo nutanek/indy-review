@@ -222,6 +222,29 @@ theme.directive('indyImg', ['$window', function ($window) {
             templateUrl: indyConfig.theme_url + "/directives/sort-selector.html"
         };
     })
+    .directive('contentRating', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                postId: '='
+            },
+            controller: 'contentRating',
+            templateUrl: indyConfig.theme_url + "/directives/content-rating.html"
+        };
+    })
+    .directive('contentRatingItem', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                emo: '=',
+                index: '=',
+                counter: '=',
+                pushRating: '&'
+            },
+            controller: 'contentRatingItem',
+            templateUrl: indyConfig.theme_url + "/directives/content-rating-item.html"
+        };
+    })
     // Add this directive where you keep your directives
     .directive('onLongPress', function($timeout) {
         return {
