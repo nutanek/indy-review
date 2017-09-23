@@ -1,0 +1,22 @@
+<div class="row contentrating" ng-mouseover="bindingTooltip()">
+    <div class="col-12">
+        <div class="row align-items-start">
+            <div class="col-6 contentrating__score font-theme">
+                <span class="got">{{ratingAvg}}</span> 
+                <span class="limit">/10</span> 
+            </div>
+            <div class="col-6 text-right">
+                 <i class="fa fa-user-o" aria-hidden="true"></i> {{numVoters}}  
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <content-rating-item 
+            ng-repeat="emo in emotion | reverse"
+            emo="emo"
+            counter="numVoters"
+            push-rating="pushRating(score)"
+        >
+        </content-rating-item>
+    </div>
+</div>

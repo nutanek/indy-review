@@ -193,7 +193,7 @@
 	    return $args;
 	}
 
-	function get_componet($name, $data=array()) {
+	function get_component($name, $data=array()) {
 		switch ($name) {
 			case 'header':
 				get_part('header'); break;

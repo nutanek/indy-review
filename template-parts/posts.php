@@ -35,7 +35,7 @@
                 while ($the_query->have_posts()) :
                     $the_query->the_post();
                     $postid = get_the_ID();
-                    get_componet('post-item', array(
+                    get_component('post-item', array(
                         'post_ID' => $postid,
                         'title' => get_the_title(),
                         'image' => get_post_image_url($postid, "medium")[0],

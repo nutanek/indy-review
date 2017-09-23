@@ -289,6 +289,29 @@ img.img_effect:hover {
     transform: scale(1.5);
 }
 
+.contentrating__score {
+    margin-top: -20px;
+}
+
+.contentrating__score .got {
+    font-size: 3em;
+    font-weight: bold;
+    color: #660C0C;
+}
+.contentrating__score .limit {
+    font-size: 1.8em;
+}
+
+.contentrating .progress {
+    position: relative;
+}
+
+.contentrating .progress .number {
+    color: #000000;
+    position: absolute;
+    right: 5px;
+    font-weight: bold;
+}
 
 /****************** Animation ******************/
 

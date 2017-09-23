@@ -1,0 +1,23 @@
+<div class="row align-items-center">
+    <div class="col-2">
+        <img class="contentrating__img" ng-mouseover="isSelect()"
+            ng-click="vote()"
+            data-toggle="tooltip" data-placement="left" ng-attr-title="{{emo.title}}"
+            ng-src="{{$root.indyConfig.theme_url + '/images/emo/' + emo.img}}">
+    </div>
+    <div class="col-10">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                role="progressbar" 
+                ng-style="{
+                    'width': ((emo.rating*100)/counter) + '%',
+                    'background-color': emo.color,
+                }" 
+                ng-attr-aria-valuenow="{{emo.rating*100/counter}}" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                <span class="number">{{emo.rating || 0}}</span>
+            </div>
+        </div>
+    </div>
+</div>

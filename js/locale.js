@@ -8,6 +8,12 @@ locale.en = {
     "__sort_lastest": "Lastest",
     "__sort_top_score": "Top Score",
     "__sort_sort_by": "sort by",
+    // toast
+    "__toast_given_socre_already": "You've already given score",
+    "__toast_you_gave": "You gave",
+    "__toast_to_this_post": "to this post",    
+    
+    
 };
 
 locale.th = {
@@ -19,4 +25,8 @@ locale.th = {
     "__sort_lastest": "ใหม่ล่าสุด",
     "__sort_top_score": "คะแนนสูงสุด",
     "__sort_sort_by": "เรียงตาม",
+    // toast
+    "__toast_given_socre_already": "คุณเคยให้คะแนนโพสนี้แล้ว",
+    "__toast_you_gave": "คุณให้",    
+    "__toast_to_this_post": "กับโพสนี้",    
 }

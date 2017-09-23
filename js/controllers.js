@@ -3,13 +3,6 @@ var theme = angular.module('indyReview', ['masonry', 'ngCookies']);
 theme.run(function ($rootScope) {
         $rootScope.indyConfig = indyConfig;
     })
-    .config(['$cookiesProvider', function($cookiesProvider) {
-        // Set $cookies defaults
-        $cookiesProvider.defaults.path = '/'; 
-        // $cookiesProvider.defaults.secure = true;
-        // $cookiesProvider.defaults.expires = exp_date;
-        // $cookiesProvider.defaults.domain = 'https://www.indytheme.com';
-    }])
     .controller('header', ['$scope', '$rootScope', '$timeout', '$http', 'ratingServices', 
                 function ($scope, $rootScope, $timeout, $http, ratingServices) {
             // ratingServices.get(32).then(function(data) {
@@ -53,7 +46,8 @@ theme.run(function ($rootScope) {
         });
 
     }])
-    .controller('postRating', ['$scope', '$rootScope', '$timeout', 'ratingServices', function ($scope, $rootScope, $timeout, ratingServices) {
+    .controller('postRating', ['$scope', '$rootScope', '$timeout', 'ratingServices', '$cookies', 
+        function ($scope, $rootScope, $timeout, ratingServices, $cookies) {
         /******************* Declarations *******************/ 
         var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
         $scope.selecting = false;
@@ -88,14 +82,28 @@ theme.run(function ($rootScope) {
             $scope.selecting = false;
         }
         $scope.pushRating = function(score) {
-            ratingServices.push($scope.postID, score).then(function(data) {
-                if (!data.result) {
-                    $scope.ratingAvg = data.data.avg
-                    updateEmo();
-                }
-            }, function() {
-                // do noting
-            });
+            var votedPosts = $cookies.getObject('indy_review') || [];
+            if (!(Array.isArray(votedPosts))) {
+                votedPosts = [];
+            }
+            if (votedPosts.indexOf($scope.postID) == -1) {
+                ratingServices.push($scope.postID, score).then(function(data) {
+                    if (!data.result) {
+                        $scope.ratingAvg = data.data.avg
+                        updateEmo();
+                        votedPosts.push($scope.postID);
+                        $cookies.putObject('indy_review', votedPosts, { path: '/'});
+                        $scope.ratingAvg = data.data.avg
+                        toastr.success(locale[lang].__toast_you_gave + 
+                            " \"" + $scope.emotion[score-1].title + "\" " +
+                            locale[lang].__toast_to_this_post);          
+                    }
+                }, function() {
+                    // do noting
+                });
+            } else {
+                toastr.warning(locale[lang].__toast_given_socre_already);              
+            }
             $(".tooltip").hide();
             $scope.closing = true;
             $timeout(function() {
@@ -190,8 +198,6 @@ theme.run(function ($rootScope) {
         ];
         $scope.numVoters = 0;
         $scope.ratingAvg = 0;
-
-        console.log("$cookieStore.get('obj')", $cookies.getObject('indy_review'))
         
         var getRatingScore = function() {
             ratingServices.get($scope.postId).then(function(data) {
@@ -227,19 +233,27 @@ theme.run(function ($rootScope) {
         };
 
         $scope.pushRating = function(score) {
-            ratingServices.push($scope.postId, score).then(function(data) {
-                if (!data.result) {
-                    var someSessionObj = 1;
-                    var posts = $cookies.getObject('indy_review') || [];
-                    posts.push($scope.postId);
-                    $cookies.putObject('indy_review', posts, { path: '/'});
-
-                    $scope.ratingAvg = data.data.avg
-                    getRatingScore();
-                }
-            }, function() {
-                // do noting
-            });
+            var votedPosts = $cookies.getObject('indy_review') || [];
+            if (!(Array.isArray(votedPosts))) {
+                votedPosts = [];
+            }
+            if (votedPosts.indexOf($scope.postId) == -1) {
+                ratingServices.push($scope.postId, score).then(function(data) {
+                    if (!data.result) {
+                        votedPosts.push($scope.postId);
+                        $cookies.putObject('indy_review', votedPosts, { path: '/'});
+                        $scope.ratingAvg = data.data.avg
+                        getRatingScore();
+                        toastr.success(locale[lang].__toast_you_gave + 
+                            " \"" + $scope.emotion[score-1].title + "\" " +
+                            locale[lang].__toast_to_this_post);              
+                    }
+                }, function() {
+                    // do noting
+                });
+            } else {
+                toastr.warning(locale[lang].__toast_given_socre_already);              
+            }
         };
     }])
     .controller('contentRatingItem', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {

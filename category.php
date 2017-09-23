@@ -6,7 +6,7 @@
     </div>
     <div class="col-xl-10 col-lg-10 col-12">
         <?php
-            get_componet('posts', array(
+            get_component('posts', array(
                 'category' => $cat,
                 'orderBy' => 'new'
             )); 
