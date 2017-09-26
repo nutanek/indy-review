@@ -1,12 +1,9 @@
 <?php get_header(); ?>
-
 <?php 
 	$post_ID = get_the_ID(); 
 	$category = gen_category_detail(get_the_category());
+	set_post_views($post_ID);
 ?>
-
-
-<?php set_post_views($post_ID) ?>
 
 <article class="row article justify-content-center" style="background: #f5f5f5" ng-controller="article">
 	<div class="col-12 article__header text-center" 
@@ -65,11 +62,10 @@
 						<content-rating post-id="<?php echo $post_ID; ?>"></content-rating>
 					</div>
 				</div>
+				<?php get_component('new-posts', array('limit' => 3)); ?>
 			</div>
 		</div>
 	</div>
-		
 </article>
-
 
 <?php get_footer(); ?>

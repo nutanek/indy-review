@@ -207,6 +207,8 @@
 				include_part('posts', $data); break;
 			case 'social-sharing':
 				include_part('social_sharing', $data); break;
+			case 'new-posts':
+				include_part('new_posts', $data); break;
 			default:
 				# code...
 				break;
@@ -364,6 +366,8 @@
 		$page = $data['page'];
 		$tag = $data['tag'];
 		$search = $data['search'];
+		$numberOfPost = $data['numberOfPost'];
+		$exclude = $data['exclude'];
 
 		$options = array(
 			'posts_per_page' => get_option('posts_per_page'),
@@ -392,6 +396,12 @@
 		}
 		if (isset($search)) {
 			$options['s'] = $search;
+		}
+		if (isset($numberOfPost)) {
+			$options['posts_per_page'] = $numberOfPost;
+		}
+		if (isset($exclude)) {
+			$options['post__not_in'] = $exclude;
 		}
 		$the_query = new WP_Query($options);
 

@@ -1,4 +1,4 @@
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 postitem tile"  masonry-tile>
+
     <div class="col card no-padding">
         <?php if ($data['image']) : ?>
         <a href="<?php echo $data['post_url']; ?>" target="_blank">
@@ -36,4 +36,3 @@
             </div>
         </div>
     </div>
-</div>

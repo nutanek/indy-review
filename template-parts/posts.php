@@ -35,6 +35,9 @@
                 while ($the_query->have_posts()) :
                     $the_query->the_post();
                     $postid = get_the_ID();
+            ?>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 postitem tile"  masonry-tile>
+                <?php
                     get_component('post-item', array(
                         'post_ID' => $postid,
                         'title' => get_the_title(),
@@ -44,8 +47,9 @@
                         'content' => gen_summary(get_the_content(), 120),
                         'category' => gen_category_detail(get_the_category())
                     ));
-                endwhile;
-            ?>
+                ?>
+                </div>
+            <?php endwhile; ?>
         </div>
     <?php else: ?>
         <div class="col posts__empty text-center">
