@@ -268,6 +268,13 @@ theme.run(function ($rootScope) {
                 score: $scope.emo.score
             });
         };
+    }])
+    .controller('sharingController', ['$scope', '$rootScope', '$timeout', 
+        function ($scope, $rootScope, $timeout) {
+        /******************* Declarations *******************/ 
+        var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
+        $scope.shareTo = locale[lang].__share_to;
+        $scope.tweetTo = locale[lang].__tweet_to;
     }]);
 
 

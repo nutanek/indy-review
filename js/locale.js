@@ -11,7 +11,10 @@ locale.en = {
     // toast
     "__toast_given_socre_already": "You've already given score",
     "__toast_you_gave": "You gave",
-    "__toast_to_this_post": "to this post",    
+    "__toast_to_this_post": "to this post",
+
+    "__share_to": "Share to",   
+    "__tweet_to": "Tweet to",   
     
     
 };
@@ -28,5 +31,9 @@ locale.th = {
     // toast
     "__toast_given_socre_already": "คุณเคยให้คะแนนโพสนี้แล้ว",
     "__toast_you_gave": "คุณให้",    
-    "__toast_to_this_post": "กับโพสนี้",    
+    "__toast_to_this_post": "กับโพสนี้",  
+
+    "__share_to": "แชร์ไปยัง",   
+    "__tweet_to": "ทวีตไปยัง",   
+    
 }

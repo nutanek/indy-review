@@ -205,6 +205,8 @@
 				include_part('post_item', $data); break;
 			case 'posts':
 				include_part('posts', $data); break;
+			case 'social-sharing':
+				include_part('social_sharing', $data); break;
 			default:
 				# code...
 				break;

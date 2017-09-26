@@ -29,6 +29,14 @@
 	</div>
 	<div class="col-xl-10 col-lg-12 col-12">
 		<div class="row">
+			<div class="col d-lg-none">
+				<?php 
+					get_component('social-sharing', array(
+						"url" => get_permalink(),
+						"title" => get_the_title()
+					)); 
+				?>
+			</div>
 			<div class="col-xl-9 col-lg-8 col-12 article__content frame">
 				<div class="card">
 					<div class="card-body">
@@ -37,9 +45,22 @@
 						<?php endwhile; ?>
 					</div>
 				</div>
+				<div class="card widget">
+					<div class="card-body">
+						<?php comments_template(); ?>
+					</div>
+				</div>
 			</div>
-			<div class="col frame">
-				<div class="card">
+			<div class="col">
+				<div class="d-none d-lg-block">
+					<?php 
+						get_component('social-sharing', array(
+							"url" => get_permalink(),
+							"title" => get_the_title()
+						)); 
+					?>
+				</div>
+				<div class="card widget">
 					<div class="card-body">
 						<content-rating post-id="<?php echo $post_ID; ?>"></content-rating>
 					</div>
