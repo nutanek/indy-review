@@ -16,36 +16,43 @@
         )
     );
 ?>
-<div class="paging hidden-xs">
-    <?php
-        if( is_array( $pages ) ) {
-            $paged = get_query_var('paged');
-            $pagination = '<ul class="pagination">';
-            foreach ( $pages as $page ) {
-                $pagination .= "<li>$page</li>";
+
+<div class="d-none d-lg-block">
+    <div class="row paging justify-content-center">
+        <?php
+            if( is_array( $pages ) ) {
+                $paged = get_query_var('paged');
+                $pagination = '<div class="btn-group" role="group">';
+                foreach ( $pages as $page ) {
+                    $pagination .= "<button type='button' class='btn btn-lg btn-secondary'>$page</button>";
+                }
+                $pagination .= '</div>';
+                echo $pagination;
             }
-            $pagination .= '</ul>';
-            echo $pagination;
-        }
-    ?>
+        ?>
+    </div>
 </div>
-<div class="paging visible-xs">
-    <?php if (get_query_var('paged') == 0) : ?>
-        <div class="col-xs-7"></div>
-    <?php endif; ?>
-    <?php
-        posts_nav_link(
-            '<div class="col-xs-2"></div>',
-            '<div class="col-xs-5 text-left">
-                <button type="button" class="btn btn-lg btn-default">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i> '.__('Previous').'
-                </button>
-            </div>',
-            '<div class="col-xs-5 text-right">
-                <button type="button" class="btn btn-lg btn-default">
-                    '.__('Next').' <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>'
-        );
-    ?>
+
+<div class="d-lg-none">
+    <div class="paging row">
+        <?php if (get_query_var('paged') == 0) : ?>
+            <div class="col-7"></div>
+        <?php endif; ?>
+        <?php
+            posts_nav_link(
+                '<div class="col"></div>',
+                '<div class="col-5 text-left">
+                    <button type="button" class="btn btn-lg btn-secondary">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i> '.__('Previous').'
+                    </button>
+                </div>',
+                '<div class="col-5 text-right">
+                    <button type="button" class="btn btn-lg btn-secondary">
+                        '.__('Next').' <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>'
+            );
+        ?>
+    </div>
 </div>
+

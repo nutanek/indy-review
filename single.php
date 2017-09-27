@@ -5,7 +5,7 @@
 	set_post_views($post_ID);
 ?>
 
-<article class="row article justify-content-center" style="background: #f5f5f5" ng-controller="article">
+<article class="row article justify-content-center" ng-controller="article">
 	<div class="col-12 article__header text-center" 
 		style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
 			 url('<?php echo get_post_image_url($post_ID, "large")[0]; ?>');">
@@ -48,7 +48,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col">
+			<aside class="col">
 				<div class="d-none d-lg-block">
 					<?php 
 						get_component('social-sharing', array(
@@ -63,7 +63,7 @@
 					</div>
 				</div>
 				<?php get_component('new-posts', array('limit' => 3)); ?>
-			</div>
+			</aside>
 		</div>
 	</div>
 </article>

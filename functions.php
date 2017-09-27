@@ -209,6 +209,8 @@
 				include_part('social_sharing', $data); break;
 			case 'new-posts':
 				include_part('new_posts', $data); break;
+			case 'pagination':
+				get_part('pagination'); break;
 			default:
 				# code...
 				break;

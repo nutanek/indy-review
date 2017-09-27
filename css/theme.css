@@ -387,7 +387,9 @@ img.img_effect:hover {
 
 /****************** Article ******************/
 
-.article {}
+.article {
+    background: #f5f5f5;
+}
 
 .article__header {
     padding-top: 100px;
@@ -407,6 +409,10 @@ img.img_effect:hover {
     display: inline-block;
 }
 
+.article__title {
+    font-weight: bold;
+}
+
 .article__category .item {
     margin: 10px 6px 0px;
     padding: 8px 15px;
@@ -416,20 +422,20 @@ img.img_effect:hover {
     float: left;
 }
 
-.article .frame {
+.frame {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
-    .article .frame {
+    .frame {
         margin-top: 0;
         padding-right: 0 !important;
         padding-left: 0 !important;
     }
 }
 
-.article .widget {
+.widget {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -438,6 +444,7 @@ img.img_effect:hover {
     font-size: 1em;
     line-height: 2.2em;
 }
+
 
 
 /****************** Sharing ******************/
@@ -497,4 +504,25 @@ img.img_effect:hover {
 
 .comment__date {
     font-size: 0.8em;
+}
+
+/****************** Pagination ******************/
+
+.paging {
+    margin-bottom: 30px;
+}
+
+.paging button {
+    cursor: pointer;
+}
+
+.paging a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.paging .current {
+    font-weight: bold;
+    color: #FFDC50;
 }

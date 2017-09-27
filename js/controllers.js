@@ -24,6 +24,7 @@ theme.run(function ($rootScope) {
         }
         angular.forEach(angular.element(document.querySelectorAll('.article__content img')), function (value, key) {
             var img = angular.element(value);
+            console.log(img);
             if (img[0].classList.value.indexOf("aligncenter") !== -1) {
                 img[0].style.marginLeft = "auto";
                 img[0].style.marginRight = "auto";
@@ -40,8 +41,9 @@ theme.run(function ($rootScope) {
 
         angular.forEach(angular.element(document.querySelectorAll('embed, iframe')), function (value, key) {
             var iframe = angular.element(value);
+            iframe.addClass('embed-responsive-item');
             var responsiveIframe = document.createElement('div');
-            responsiveIframe.className = "video-wrapper";
+            responsiveIframe.className = "embed-responsive embed-responsive-16by9";
             wrap(value, responsiveIframe);
         });
 
