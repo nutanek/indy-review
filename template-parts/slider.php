@@ -1,6 +1,6 @@
 <?php 
     $the_query = gen_query_post(array(
-        'catID' => 1,
+        'catID' => 'all',
         'orderBy' => 'new',
         'numberOfPost' => 3
     ));

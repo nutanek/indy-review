@@ -15,9 +15,6 @@
             catID: <?php echo $data['category']; ?> }">
   
     <div class="row">
-        <div class="col">
-            <!-- ssssss -->
-        </div>
         <?php if ( $the_query->have_posts() ) : ?>
         <div class="col text-right">
             <sort-selector sort-by="sortBy(option)"></sort-selector>
@@ -53,7 +50,8 @@
         </div>
     <?php else: ?>
         <div class="col posts__empty text-center">
-            <?php _e('Sorry, no posts matched your criteria.'); ?>
+            <img src="<?php echo get_template_directory_uri(); ?>/images/no_result.svg" />
+            <p><?php echo __indy('no_posts_matched'); ?></p>
         </div>
     <?php endif; ?>
 

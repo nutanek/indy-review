@@ -160,6 +160,13 @@ img.img_effect:hover {
 .posts__empty {
     margin-top: 50px;
     margin-bottom: 50px;
+    font-size: 2em;
+    color: #666666;
+}
+
+.posts__empty img {
+    width: 150px;
+    margin-bottom: 20px;
 }
 
 
@@ -756,7 +763,7 @@ a.rslides1_nav:hover {
 }
 
 .slider__title--2 {
-    top: 28%;
+    top: 30%;
 }
 
 .slider__text {
@@ -841,4 +848,27 @@ a.rslides1_nav:hover {
 .spinner-loading .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
+}
+
+
+/****************** 404 Page******************/
+
+.page404 {
+    background: #f5f5f5;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #666666;
+}
+
+.page404 img {
+    width: 150px;
+}
+
+.page404 .item {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.page404 button {
+    cursor: pointer;
 }
