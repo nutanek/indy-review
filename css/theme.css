@@ -357,6 +357,99 @@ img.img_effect:hover {
     animation-name: fadeOutDown;
 }
 
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+
+.fideIn {
+    -webkit-animation: fadein 1s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1s;
+    /* Firefox < 16 */
+    -ms-animation: fadein 1s;
+    /* Internet Explorer */
+    -o-animation: fadein 1s;
+    /* Opera < 12.1 */
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Firefox < 16 */
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Internet Explorer */
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Opera < 12.1 */
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 
 /****************** Category ******************/
 
@@ -446,7 +539,6 @@ img.img_effect:hover {
 }
 
 
-
 /****************** Sharing ******************/
 
 .share {
@@ -491,6 +583,7 @@ img.img_effect:hover {
     border-bottom-right-radius: 5px;
 }
 
+
 /****************** Comment ******************/
 
 .comment__avatar img {
@@ -505,6 +598,7 @@ img.img_effect:hover {
 .comment__date {
     font-size: 0.8em;
 }
+
 
 /****************** Pagination ******************/
 
@@ -525,4 +619,226 @@ img.img_effect:hover {
 .paging .current {
     font-weight: bold;
     color: #FFDC50;
+}
+
+
+/****************** Image Slider ******************/
+
+.slider {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
+    color: #FFFFFF;
+}
+
+.slider a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+a.rslides1_nav {
+    position: absolute;
+    margin-top: -290px;
+    z-index: 99999;
+    color: rgba(255, 255, 255, 0);
+    font-size: 2.5em;
+    -o-transition: color .3s ease-out, background 1s ease-in;
+    -ms-transition: color .3s ease-out, background 1s ease-in;
+    -moz-transition: color .3s ease-out, background 1s ease-in;
+    -webkit-transition: color .3s ease-out, background 1s ease-in;
+    /* ...and now override with proper CSS property */
+    transition: color .3s ease-out, background 1s ease-in;
+}
+
+a.prev {
+    left: 25px;
+}
+
+a.next {
+    right: 25px;
+}
+
+@media (max-width: 1199px) {
+    a.rslides1_nav {
+        margin-top: -240px;
+    }
+}
+
+@media (max-width: 767px) {
+    a.rslides1_nav {
+        margin-top: -480px;
+    }
+}
+
+.slider:hover~a.rslides1_nav {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+a.rslides1_nav:hover {
+    color: #FFFFFF;
+}
+
+.slider img {
+    display: block;
+    height: auto;
+    float: left;
+    border: 0;
+    -o-transition: .3s;
+    -ms-transition: .3s;
+    -moz-transition: .3s;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.slider:hover img {
+    transform: scale(1.05);
+}
+
+.slider__item {
+    background: #DDDDDD;
+    background-size: cover;
+    background-position: center center;
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0
+}
+
+.slider__item:first-child {
+    position: relative;
+    display: block;
+    float: left
+}
+
+@media (min-width: 575px) {
+    .slider__item {
+        height: 500px;
+    }
+}
+
+@media (min-width: 767px) {
+    .slider__item {
+        height: 400px;
+    }
+}
+
+@media (min-width: 991px) {
+    .slider__item {
+        height: 400px;
+    }
+}
+
+@media (min-width: 1199px) {
+    .slider__item {
+        height: 500px;
+    }
+}
+
+.slider__title {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+}
+
+.slider__title--1 {
+    bottom: 0;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    text-align: left;
+    background: red;
+    background: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8));
+    background: -o-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8));
+    background: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8));
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8));
+}
+
+.slider__title--2 {
+    top: 28%;
+}
+
+.slider__text {
+    font-size: 3em;
+    font-weight: bold;
+    line-height: 1.2em;
+}
+
+.slider__text--1 {
+    width: 50%;
+}
+
+.slider__time {
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+
+@media (max-width: 991px) {
+    .slider__text--1 {
+        width: 80%;
+    }
+}
+
+@media (max-width: 767px) {
+    .slider__title {
+        text-align: center;
+    }
+    .slider__text--1 {
+        width: 100%;
+    }
+}
+
+.slider__category {
+    display: inline-block;
+}
+
+.slider__category .item {
+    margin: 10px 6px 0px;
+    padding: 8px 15px;
+    border-radius: 100px;
+    font-size: 0.9em;
+    color: #FFFFFF;
+    float: left;
+}
+
+
+/****************** Loading ******************/
+
+.spinner-loading {
+    margin: 20px auto 0;
+    width: 100px;
+    text-align: center;
+}
+
+.spinner-loading>div {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner-loading .bounce1 {
+    background: #e74c3c;
+}
+
+.spinner-loading .bounce2 {
+    background: #f1c40f;
+}
+
+.spinner-loading .bounce3 {
+    background: #3498db;
+}
+
+.spinner-loading .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.spinner-loading .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
 }

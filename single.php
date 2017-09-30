@@ -2,13 +2,16 @@
 <?php 
 	$post_ID = get_the_ID(); 
 	$category = gen_category_detail(get_the_category());
+	$image = get_post_image_url($post_ID, "large")[0];
 	set_post_views($post_ID);
 ?>
-
 <article class="row article justify-content-center" ng-controller="article">
-	<div class="col-12 article__header text-center" 
-		style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-			 url('<?php echo get_post_image_url($post_ID, "large")[0]; ?>');">
+	<div class="col-12 article__header text-center" style="
+		<?php if ($image) : ?>
+			background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(<?php echo $image; ?>)
+		<?php else : ?>
+			background-color: <?php echo gen_background_color($post_ID); ?>
+		<?php endif; ?>">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 col-lg-9 col-11">
 				<h1 class="font-theme"><?php the_title(); ?></h1>
@@ -67,5 +70,4 @@
 		</div>
 	</div>
 </article>
-
 <?php get_footer(); ?>

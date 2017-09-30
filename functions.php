@@ -410,8 +410,12 @@
 		return $the_query;
 	}
 
-
-
+	function gen_background_color($id) {
+		$colors = array('34495e', '674172', '446CB3', '019875', '336E7B', '792117', '6C7A89', '381905');
+		$size = sizeof($colors);
+		$result = '#'.$colors[$id % $size];
+		return $result;
+	}
 
 	/***************** API *****************/
 	class IndyAPI {
