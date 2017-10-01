@@ -2,8 +2,8 @@
     <div class="row headertop justify-content-center">
         <div class="col-md-11">
             <div class="row align-items-center">
-                <div class="col" >
-                    social
+                <div class="col headertop__social" >
+                    <?php get_component('social-following'); ?>
                 </div>
                 <div class="col-md-7 col-12 headertop__logo">
                     <div class="row text-center">

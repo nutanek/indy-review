@@ -213,6 +213,8 @@
 				get_part('pagination'); break;
 			case 'search-form':
 				get_part('search_form'); break;
+			case 'social-following':
+					get_part('social_following'); break;
 			default:
 				# code...
 				break;
