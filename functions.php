@@ -413,6 +413,24 @@
 		return $result;
 	}
 
+	function get_social() {
+		$optionName = 'indyreview_socials';
+		$socials = get_option($optionName);
+		if ($socials) {
+			$socials = (array) json_decode($socials);
+			return $socials;
+		}
+		return null;
+	}
+
+	function get_logo() {
+		$logo = get_option("indyreview_logo");
+		if (!$logo) {
+			return get_template_directory_uri().'/images/logo.png';
+		}
+		return $logo;
+	}
+
 	/***************** API *****************/
 	class IndyAPI {
 		private static $route = 'indy-review/v1';
@@ -422,6 +440,7 @@
 			self::register('/rating/avg/(?P<post_id>\d+)', 'get_rating_avg', 'GET');
 			self::register('/rating/(?P<post_id>\d+)', 'push_rating', 'POST');
 			self::register('/posts', 'get_posts', 'POST');
+			self::register('/logo', 'upload_logo', 'POST');
 		}
 
 		static function register($path, $function, $method) {
@@ -536,7 +555,29 @@
 					"msg" => "posts not found"
 				);
 			}
-		
 		}
+
+		function upload_logo($data) {
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			}
+			$uploadedfile = $_FILES['file'];
+			$upload_overrides = array(
+				'test_form' => false
+			);
+			$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+			if ( $movefile && ! isset( $movefile['error'] ) ) {
+				update_option("indyreview_logo", $movefile['url']);
+				return array(
+					"result" => 0,
+					"url" => $movefile['url']
+				);
+			} else {
+				return array(
+					"result" => 1
+				);
+			}
+		}
+
 	}
 ?>

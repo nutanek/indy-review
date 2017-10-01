@@ -6,8 +6,10 @@
                     <?php get_component('social-following'); ?>
                 </div>
                 <div class="col-md-7 col-12 headertop__logo">
-                    <div class="row text-center">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" class="img-fluid mx-auto d-block" alt="logo">
+                    <div class="row justify-content-center">
+                        <a href="<?php echo get_home_url(); ?>">
+                            <img src="<?php echo get_logo(); ?>" class="img-fluid mx-auto d-block" alt="logo">
+                        </a>
                     </div>
                 </div>
                 <div class="col headertop__search" >
