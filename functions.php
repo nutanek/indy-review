@@ -211,6 +211,8 @@
 				include_part('new_posts', $data); break;
 			case 'pagination':
 				get_part('pagination'); break;
+			case 'search-form':
+				get_part('search_form'); break;
 			default:
 				# code...
 				break;
@@ -234,14 +236,6 @@
 
 	function sidebar_new_category($catID, $postID, $limit) {
 		include(locate_template('template-parts/sidebar_new_cat.php'));
-	}
-
-	function share_social($postID) {
-		include(locate_template('template-parts/share.php'));
-	}
-
-	function search_form() {
-		include(locate_template('template-parts/search_form.php'));
 	}
 
 	function nav_bar($type) {

@@ -60,7 +60,16 @@ img.img_effect:hover {
 
 .headertop__social {}
 
-.headertop__serach {}
+.headertop__search input {
+    border-top-left-radius: 100px;    
+    border-bottom-left-radius: 100px;
+}
+
+.headertop__search button {
+    cursor: pointer;
+    border-top-right-radius: 100px;    
+    border-bottom-right-radius: 100px;
+}
 
 .headernav--lg {
     border-top: 1px solid #DBDBDB;
