@@ -1,10 +1,4 @@
-<?php
-// set_arr_menu();
-    $menu = get_menu();
-    // $arr = (array) $menu[0];
-    // print_r($menu);
-?>
-
+<?php $menu = get_menu(); ?>
 <nav class="row headernav--lg justify-content-center">
     <div class="col-md-11">
         <ul class="row justify-content-center font-theme">

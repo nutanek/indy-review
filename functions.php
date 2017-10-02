@@ -1,12 +1,10 @@
 <?php
 	/*************** Actions ***************/
-	add_action( 'wp_enqueue_scripts', 'theme_styles' );
-	add_action( 'wp_footer', 'footer_script' );
-	add_action( 'after_switch_theme', 'indyBlog_theme_setup' );
-	add_action( 'after_setup_theme', 'indyBlog_theme_setup' );
 	add_action( 'admin_bar_menu', 'custom_toolbar_link', 40);
 	add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
-	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );	
+	add_action( 'wp_enqueue_scripts', 'theme_styles' );
+	add_action( 'wp_footer', 'footer_script' );
 	add_action( 'rest_api_init', array('IndyAPI', 'init_routes') ); 
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 	/*************** Filter ***************/
@@ -32,18 +30,6 @@
 		wp_enqueue_script( 'services-js', get_template_directory_uri() . '/js/services.js');
 		wp_enqueue_script( 'directives-js', get_template_directory_uri() . '/js/directives.js');
 		wp_enqueue_script( 'combined-script', get_template_directory_uri() . '/js/script.js');
-	}
-
-	function indyBlog_theme_setup() {
-		global $theme_lang;
-		$theme_lang = get_locale();
-	    add_theme_support( 'post-thumbnails');
-		$imgCover = get_template_directory_uri().'/images/cover/home.jpg';
-		$option = get_option('indyblog_cover_homepage');
-  	  	if ($option == '' || !$option) {
-  	  		delete_option($optionName);
-  	    	add_option($optionName, $imgCover, '', 'yes' );
-  	  	}
 	}
 
 	function get_theme_config() {
@@ -214,7 +200,9 @@
 			case 'search-form':
 				get_part('search_form'); break;
 			case 'social-following':
-					get_part('social_following'); break;
+				get_part('social_following'); break;
+			case 'copyright':
+				get_part('copyright'); break;
 			default:
 				# code...
 				break;
@@ -248,17 +236,6 @@
 		}
 	}
 
-	function indyblog_pagination() {
-		get_template_part('template-parts/pagination');
-	}
-
-	function footer_widget() {
-		get_template_part('template-parts/footer_widget');
-	}
-
-	function copyright() {
-		get_template_part('template-parts/copyright');
-	}
 
 	function get_list_indyblog($optionName) {
 		$option = get_option($optionName);

@@ -930,3 +930,42 @@ a.rslides1_nav:hover {
 .page404 button {
     cursor: pointer;
 }
+
+
+/****************** footer******************/
+
+.footer {
+    padding-top: 50px;
+    padding-bottom: 40px;
+    background: #34495e;
+    color: #FFFFFF;
+}
+
+.footer__social a {
+    font-size: 1.5em;
+    color: #FFFFFF;
+}
+
+.footer__social .item {
+    padding: 0 8px;
+    transition: all .2s ease-in-out;
+}
+
+.footer__social .item:hover {
+    transform: scale(2);
+}
+
+.footer__copyright {
+    margin-top: 20px;
+}
+
+.footer__copyright p.copyright {
+    line-height: 1em;
+}
+
+.footer__copyright p.credit,
+.footer__copyright p.credit a {
+    font-size: 0.9em;
+    line-height: 0.3em;
+    color: rgba(255, 255, 255, 0.3);
+}
