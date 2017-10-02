@@ -1,14 +1,21 @@
+<?php
+// set_arr_menu();
+    $menu = get_menu();
+    // $arr = (array) $menu[0];
+    // print_r($menu);
+?>
+
 <nav class="row headernav--lg justify-content-center">
     <div class="col-md-11">
         <ul class="row justify-content-center font-theme">
             <li class="headernav--lg__menu --color-0">
-                <?php echo __indy('home'); ?>
+                <a href="<?php echo get_home_url(); ?>"><?php echo __indy('home'); ?></a>
             </li>
-            <?php for ($i=1; $i<6; $i++) : ?>
-            <li class="headernav--lg__menu --dotted --color-<?php echo ($i%5); ?>">
-                <?php echo __indy('หน้าแรก'); ?>
+            <?php foreach ($menu as $key=>$item) : ?>
+            <li class="headernav--lg__menu --dotted --color-<?php echo (($key+1)%5); ?>">
+                <a href="<?php echo $item['url']; ?>"><?php echo $item['name']; ?></a>
             </li>
-            <?php endfor; ?>
+            <?php endforeach; ?>
         </ul>
     </div>
 </nav>

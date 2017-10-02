@@ -431,6 +431,46 @@
 		return $logo;
 	}
 
+	// function set_arr_menu() {
+	// 	$arr = array(
+	// 		array(
+	// 			"type" => "cat",
+	// 			"data" => 1
+	// 		),
+	// 		array(
+	// 			"type" => "link",
+	// 			"name" => "เกี่ยวกับเรา",
+	// 			"data" => "https://www.indytheme.com"
+	// 		),
+	// 		array(
+	// 			"type" => "cat",
+	// 			"data" => 2
+	// 		)
+	// 	);
+	// 	update_option("indyreview_menu", json_encode($arr));
+	// }
+
+	function get_menu() {
+		$menus = get_option("indyreview_menu");
+		$menus = (array) json_decode($menus);
+		$result = array();
+		foreach ($menus as $menu) {
+			$menu = (array) $menu;
+			if ($menu["type"] == "cat") {
+				array_push($result, array(
+					"name" => get_cat_name($menu["data"]),
+					"url" => esc_url(get_category_link($menu["data"]))
+				));
+			} else {
+				array_push($result, array(
+					"name" => $menu["name"],
+					"url" => $menu["data"]
+				));
+			}
+		}
+		return $result;
+	}
+
 	/***************** API *****************/
 	class IndyAPI {
 		private static $route = 'indy-review/v1';

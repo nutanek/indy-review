@@ -3,6 +3,10 @@
 /---------- Author: indytheme.com
 */
 
+a:hover {
+    text-decoration: none;
+}
+
 .img_fade:hover {
     -webkit-transition: opacity .3s linear;
     -moz-transition: opacity .3s linear;
@@ -127,6 +131,10 @@ img.img_effect:hover {
     transition: all .2s ease-in-out;
 }
 
+.headernav--lg ul li a {
+    color: #000000;
+}
+
 .headernav--lg ul li:hover {
     cursor: pointer;
     transform: translateY(-5px);
@@ -141,27 +149,27 @@ img.img_effect:hover {
     margin-top: 14px;
 }
 
-.headernav--lg ul li.--color-0:hover,
+.headernav--lg ul li.--color-0:hover a,
 .headernav--lg ul li.--color-0::before {
     color: #e74c3c;
 }
 
-.headernav--lg ul li.--color-1:hover,
+.headernav--lg ul li.--color-1:hover a,
 .headernav--lg ul li.--color-1::before {
     color: #f1c40f;
 }
 
-.headernav--lg ul li.--color-2:hover,
+.headernav--lg ul li.--color-2:hover a,
 .headernav--lg ul li.--color-2::before {
     color: #2ecc71;
 }
 
-.headernav--lg ul li.--color-3:hover,
+.headernav--lg ul li.--color-3:hover a,
 .headernav--lg ul li.--color-3::before {
     color: #3498db;
 }
 
-.headernav--lg ul li.--color-4:hover,
+.headernav--lg ul li.--color-4:hover a,
 .headernav--lg ul li.--color-4::before {
     color: #9b59b6;
 }
@@ -271,7 +279,13 @@ img.img_effect:hover {
 }
 
 .postrating__emo {
-    width: 20px;
+    width: 22px;
+}
+
+@media (max-width: 767px) {
+    .postrating__emo {
+        width: 30px;
+    }
 }
 
 .postrating__selector {
