@@ -1,4 +1,17 @@
-<header class="header" ng-controller="header">
+<div class="headerxs d-md-none">
+    <div class="row">
+        <div class="col headerxs__logo">
+            <a href="<?php echo get_home_url(); ?>">
+                <img src="<?php echo get_logo(); ?>" alt="logo">
+            </a>
+        </div>
+        <div class="col headerxs__menu text-right">
+            <i class="fa fa-bars" aria-hidden="true" ng-click="toggleNav(true)"></i>
+        </div>
+    </div>
+</div>
+<div class="headerxs__back d-md-none"></div>
+<header class="header d-none d-md-block">
     <div class="row headertop justify-content-center">
         <div class="col-md-11">
             <div class="row align-items-center">

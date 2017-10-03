@@ -1,12 +1,13 @@
 <?php
 	/*************** Actions ***************/
-	add_action( 'admin_bar_menu', 'custom_toolbar_link', 40);
+	add_action( 'init', 'get_theme_config' );
+	add_action( 'admin_bar_menu', 'custom_toolbar_link', 40 );
 	add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
 	add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );	
 	add_action( 'wp_enqueue_scripts', 'theme_styles' );
 	add_action( 'wp_footer', 'footer_script' );
 	add_action( 'rest_api_init', array('IndyAPI', 'init_routes') ); 
-	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	/*************** Filter ***************/
 	add_filter( 'wp_title', 'filter_wp_title' );
 	add_filter( 'comment_form_default_fields', 'bootstrap3_comment_form_fields' );
@@ -22,10 +23,11 @@
 		wp_enqueue_script( 'locale-js', get_template_directory_uri() . '/js/locale.js');
 		wp_enqueue_script( 'jquery-js', get_template_directory_uri() . '/js/jquery.min.js');
 		wp_enqueue_script( 'slide-js', get_template_directory_uri() . '/js/slide.js');
+		wp_enqueue_script( 'angular-js', get_template_directory_uri() . '/js/angular.min.js');
+		
 	}
 
 	function footer_script() {
-		wp_enqueue_script( 'angular-js', get_template_directory_uri() . '/js/angular.min.js');
 		wp_enqueue_script( 'controllers-js', get_template_directory_uri() . '/js/controllers.js');
 		wp_enqueue_script( 'services-js', get_template_directory_uri() . '/js/services.js');
 		wp_enqueue_script( 'directives-js', get_template_directory_uri() . '/js/directives.js');
@@ -34,6 +36,7 @@
 
 	function get_theme_config() {
 		global $theme_lang;
+		$theme_lang = get_locale();
 		$config = array(
 			"site_url" => site_url(),
 			"theme_url" => get_template_directory_uri(),
@@ -185,6 +188,8 @@
 				get_part('header'); break;
 			case 'nav-lg':
 				get_part('nav_lg'); break;
+			case 'nav-xs':
+				get_part('nav_xs'); break;
 			case 'slider':
 				get_part('slider'); break;
 			case 'post-item':
@@ -218,24 +223,6 @@
 		$path = 'template-parts';
 		get_template_part($path.'/'.$name);
 	}
-
-
-
-
-
-
-	function sidebar_new_category($catID, $postID, $limit) {
-		include(locate_template('template-parts/sidebar_new_cat.php'));
-	}
-
-	function nav_bar($type) {
-		if ($type == "lg") {
-			get_template_part('template-parts/nav_lg');
-		} else if ("xs") {
-			get_template_part('template-parts/nav_xs');
-		}
-	}
-
 
 	function get_list_indyblog($optionName) {
 		$option = get_option($optionName);

@@ -17,5 +17,9 @@
 	</head>
 	<body ng-app="indyReview">
 		<div class="container-fluid">
-		<?php get_component('header'); ?>
-		<?php get_component('nav-lg'); ?>
+			<div ng-controller="header">
+			<?php get_component('header'); ?>
+			<?php get_component('nav-lg'); ?>
+			<?php get_component('nav-xs'); ?>
+			</div>
+		

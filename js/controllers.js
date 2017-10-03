@@ -3,19 +3,18 @@ var theme = angular.module('indyReview', ['masonry', 'ngCookies']);
 theme.run(function ($rootScope) {
         $rootScope.indyConfig = indyConfig;
     })
-    .controller('header', ['$scope', '$rootScope', '$timeout', '$http', 'ratingServices', 
-                function ($scope, $rootScope, $timeout, $http, ratingServices) {
-            // ratingServices.get(32).then(function(data) {
-            //     console.log("11111", data);
-            // }, function(err) {
-            //     console.log("11111", err);
-            // });
-
-            // ratingServices.getAvg(32).then(function(data) {
-            //     console.log("111qqq11", data);
-            // }, function(err) {
-            //     console.log("11qqq111", err);
-            // });
+    .controller('header', ['$scope', '$timeout', function ($scope, $timeout) {
+        $scope.navStatus = false;
+        $scope.isBusy = false;
+        $scope.toggleNav = function(status) {
+            if (!$scope.isBusy) {
+                $scope.isBusy = true;
+                $scope.navStatus = status;
+                $timeout(function() {
+                    $scope.isBusy = false;
+                }, 200);
+            }
+        }
     }])
     .controller('article', ['$scope', '$timeout', function ($scope, $timeout) {
         var wrap = function (el, wrapper) {

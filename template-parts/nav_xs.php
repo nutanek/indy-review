@@ -1,36 +1,20 @@
-<?php
-    $menuList = get_list_indyblog('indyblog_ordered_categories');
-    if (is_user_logged_in()) {
-        $topNav = 90;
-    } else {
-        $topNav = 50;
-    }
-?>
-<div nav-slider top=<?php echo $topNav; ?> class="font-theme">
-    <div class="row navxs">
-        <div class="col-xs-8">
-            <a href="<?php echo site_url(); ?>">
-                <img class="navxs__logo" src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="logo">
-            </a>
-        </div>
-        <div class="col-xs-4 text-right navxs__toggle" ng-click="toggle()">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-        </div>
+<?php $menu = get_menu(); ?>
+<div class="col-12 resmenu animated font-theme d-md-none" ng-show="navStatus || isBusy" ng-cloak
+    ng-class="navStatus ? 'fadeInRightBig' : 'fadeOutRightBig'">
+	<div class="row resmenu__close justify-content-end">
+	    <i class="fa fa-times" aria-hidden="true" ng-click="toggleNav(false)"></i>
+	</div>
+	<div class="row resmenu__search justify-content-center">
+		<div class="col-9 font-normal">
+		    <?php get_component('search-form'); ?>
+		</div>
+	</div>
+	<div class="row resmenu__item justify-content-center">
+        <a href="<?php echo get_home_url(); ?>"><?php echo __indy('home'); ?></a>
+	</div>
+	<?php foreach ($menu as $key=>$item) : ?>
+	<div class="row resmenu__item justify-content-center">
+        <a href="<?php echo $item['url']; ?>"><?php echo $item['name']; ?></a>
     </div>
-    <div class="row navxs__slider animated" ng-class="effect" ng-style="{'height': menuHeight+'px'}" ng-show="toggleStatus">
-        <ul>
-            <a href="<?php echo site_url(); ?>">
-                <li>
-                    <i class="fa fa-play" aria-hidden="true"></i> <?php echo __('หน้าแรก'); ?>
-                </li>
-            </a>
-            <?php foreach ($menuList as $menu) : ?>
-                <a href="<?php echo esc_url(get_category_link($menu)) ?>">
-                    <li>
-                        <i class="fa fa-play" aria-hidden="true"></i> <?php echo get_cat_name($menu); ?>
-                    </li>
-                </a>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+	<?php endforeach; ?>
 </div>

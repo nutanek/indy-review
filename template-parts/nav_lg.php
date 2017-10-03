@@ -1,5 +1,5 @@
 <?php $menu = get_menu(); ?>
-<nav class="row headernav--lg justify-content-center">
+<nav class="row headernav--lg justify-content-center d-none d-md-block">
     <div class="col-md-11">
         <ul class="row justify-content-center font-theme">
             <li class="headernav--lg__menu --color-0">
