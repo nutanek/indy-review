@@ -23,7 +23,6 @@ theme.run(function ($rootScope) {
         }
         angular.forEach(angular.element(document.querySelectorAll('.article__content img')), function (value, key) {
             var img = angular.element(value);
-            console.log(img);
             if (img[0].classList.value.indexOf("aligncenter") !== -1) {
                 img[0].style.marginLeft = "auto";
                 img[0].style.marginRight = "auto";
@@ -132,10 +131,8 @@ theme.run(function ($rootScope) {
                 tag: $scope.extension.tag || undefined,
                 search: $scope.extension.search || undefined
             };
-            // console.log(options)
             postsServices.get(options).then(function(posts) {
                 $scope.showContent = true; 
-                console.log(posts)
                 if (!posts.result) {
                     var newScope = $scope.$new(true);
                     newScope.posts = posts.data;
@@ -167,9 +164,6 @@ theme.run(function ($rootScope) {
             $element.find('.posts__body').empty();
             $scope.loadMore();
         };
-    }])
-    .controller('postItem', ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
-        // console.log($scope.options);
     }])
     .controller('sortSelector', ['$scope', '$rootScope', function ($scope, $rootScope) {
         var lang = $rootScope.indyConfig.lang == 'th' || lang == 'th_TH' ? 'th' : 'en';
@@ -210,7 +204,6 @@ theme.run(function ($rootScope) {
                         return total + num; 
                     });
                 }
-                console.log($scope.emotion)
             }, function(err) {
                 // do noting
             });
@@ -264,7 +257,6 @@ theme.run(function ($rootScope) {
         };
         
         $scope.vote = function() {
-            console.log('ssssssssss')
             $scope.pushRating({
                 score: $scope.emo.score
             });
