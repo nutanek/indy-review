@@ -17,20 +17,46 @@ export default class Sidebar extends React.Component {
         const Logo = styled.img`
             width: 80%;
         `;
+        const Profile = styled.img`
+            width: 50%;
+            border-radius: 100%;
+            border: 3px solid #ffffff;
+            &:hover {
+                opacity: 0.5;
+            }
+        `;
+
+        const menu = [
+            { title: "Dashboard", icon: "tachometer", link: "" },
+            { title: "Logo", icon: "star", link: "logo" },
+            { title: "Tones", icon: "eyedropper", link: "tones" },
+            { title: "Slider", icon: "image", link: "slider" },
+            { title: "Menu", icon: "bars", link: "menu" },
+            { title: "Socials", icon: "facebook-square", link: "social" }
+        ]
 
         return (
             <Sidebar>
                 <Wrapper className="text-center">
-                    <Logo src={logo} />
+                    <a href={window.config.rootUrl}>
+                        <Logo src={logo} />
+                    </a>
+                </Wrapper>
+                <Wrapper className="text-center">
+                    <a href={window.config.setting.profile}>
+                        <Profile src={window.config.admin.profileImg} />
+                    </a>
                 </Wrapper>
                 <Wrapper>
                     <div className="col-12 font-theme">
-                        <SidebarMenu title="หน้าควบคุม" icon="tachometer" link="" />
-                        <SidebarMenu title="โลโก้" icon="star" link="logo" />
-                        <SidebarMenu title="โทนสี" icon="eyedropper" link="tone" />
-                        <SidebarMenu title="สไลด์" icon="image" link="slide" />
-                        <SidebarMenu title="เมนู" icon="bars" link="menu" />
-                        <SidebarMenu title="โซเชียล" icon="facebook-square" link="social" />
+                       {
+                           menu.map((item, key) => 
+                                <SidebarMenu 
+                                    title={item.title}
+                                    icon={item.icon}
+                                    link={item.link} />
+                           )
+                       }
                     </div>
                 </Wrapper>
             </Sidebar> 

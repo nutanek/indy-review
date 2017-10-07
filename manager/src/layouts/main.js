@@ -1,23 +1,28 @@
 import React from 'react'
 import Sidebar from './../components/sidebar'
 import styled from 'styled-components'
+import T from 'i18n-react';
 
 export default class MainLayout extends React.Component {
     render() {
         const Main = styled.div`
-            background-color:#f2f2f2;
+            background-color: #f5f5f5;
         `;
         const Wrapper = styled.div`
             padding: 0;
         `;
         const Header = styled.div`
-            background-color:#ffcc00;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e6e6e6;
             height: 50px;
         `;
         const Content = styled.div`
+            padding-top: 20px;
+            padding-bottom: 20px;
             height: calc(100vh - 50px);
+            overflow-x: hidden;
+            overflow-y: auto;
         `;
-
 
         return (
             <Main className="container-fluid">
@@ -27,7 +32,7 @@ export default class MainLayout extends React.Component {
                     </Wrapper>
                     <Wrapper className="col">
                         <Header className="col">
-                            ssss
+                            
                         </Header>
                         <Content className="col">
                             {this.props.children}

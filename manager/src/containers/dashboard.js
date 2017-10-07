@@ -5,7 +5,14 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <MainLayout>
-                Dashboard 
+                <div className="card">
+                    <div className="card-header">
+                    Featured
+                    </div>
+                    <div className="card-body">
+                        
+                    </div>
+                </div>
             </MainLayout>
         )
     }

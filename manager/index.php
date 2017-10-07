@@ -22,7 +22,7 @@
                 id: <?php echo $user_info->ID; ?>,
                 name: "<?php echo $user_info->user_nicename; ?>",
                 email: "<?php echo $user_info->user_email; ?>",
-                profile_img: "<?php echo get_avatar_indy_url( $user_info->user_email, 200); ?>",
+                profileImg: "<?php echo get_avatar_indy_url( $user_info->user_email, 200); ?>",
             }
         };
     </script>
