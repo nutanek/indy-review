@@ -25,7 +25,12 @@ export default class Sidebar extends React.Component {
                 </Wrapper>
                 <Wrapper>
                     <div className="col-12 font-theme">
-                        <SidebarMenu title="หน้าแรก" icon="bath"/>
+                        <SidebarMenu title="หน้าควบคุม" icon="tachometer" link="" />
+                        <SidebarMenu title="โลโก้" icon="star" link="logo" />
+                        <SidebarMenu title="โทนสี" icon="eyedropper" link="tone" />
+                        <SidebarMenu title="สไลด์" icon="image" link="slide" />
+                        <SidebarMenu title="เมนู" icon="bars" link="menu" />
+                        <SidebarMenu title="โซเชียล" icon="facebook-square" link="social" />
                     </div>
                 </Wrapper>
             </Sidebar> 
