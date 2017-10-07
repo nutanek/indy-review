@@ -11,6 +11,13 @@ module.exports = {
 
     module: {
         loaders: [{
+                test: /\.png$/,
+                loader: "url-loader",
+                query: {
+                    mimetype: "image/png"
+                }
+            },
+            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader'
             },
@@ -20,8 +27,19 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-            }
+                loaders: ["style-loader", "css-loader", "sass-loader"]
+            },
+            {
+                test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/',
+                        publicPath: '../'
+                    }
+                }]
+            },
         ]
     }
 };
