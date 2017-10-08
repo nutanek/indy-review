@@ -52,6 +52,7 @@ export default class Sidebar extends React.Component {
                        {
                            menu.map((item, key) => 
                                 <SidebarMenu 
+                                    key={key}
                                     title={item.title}
                                     icon={item.icon}
                                     link={item.link} />

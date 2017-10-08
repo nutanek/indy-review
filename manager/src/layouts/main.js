@@ -1,7 +1,6 @@
 import React from 'react'
 import Sidebar from './../components/sidebar'
 import styled from 'styled-components'
-import T from 'i18n-react';
 
 export default class MainLayout extends React.Component {
     render() {

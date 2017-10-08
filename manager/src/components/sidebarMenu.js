@@ -20,7 +20,7 @@ export default class SidebarMenu extends React.Component {
 
     isCurrentPage(page) {
         let currentPage = page.replace("#/", "")
-        if (currentPage == this.props.link) {
+        if (currentPage === this.props.link) {
             return true
         }
         return false
@@ -31,7 +31,7 @@ export default class SidebarMenu extends React.Component {
     }
 
     render() {
-        let { title, icon, link, selected } = this.props
+        let { title, icon, link } = this.props
 
         if (this.state.redirect) {
             return <Redirect push to={ '/' + link } />
