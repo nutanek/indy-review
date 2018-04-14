@@ -1,36 +1,25 @@
-// import axios from 'axios'
+import axios from 'axios'
+import { getToken } from './token'
 
 export async function getTone() {
     try {
-        let response = await fetch(window.config.api + "tone");
-        let data = await response.json();
-        return data.tone;
+        let res = await axios.get(window.config.api + "tone")
+        return res.data.tone
     } catch (error) {
-        console.error(error);
+        console.error(error)
     }
 }
 
 export async function setTone(tone) {
     try {
-        let response = await fetch(
+        let res = await axios.post(
             window.config.api + "tone", {
-
-                method: "POST",
-                headers: {
-                    // 'Accept': 'application/json, text/plain, */*',
-                    // 'Content-Type': 'application/json',
-                    // 'X-WP-Nonce': '45991ae126'
-                    // 'X-WP-Nonce': '17b1ffa1c9'
-                },
-                body: JSON.stringify({
-                    tone: tone,
-                    _nonce: '45991ae126'
-                })
+                jwt: getToken(),
+                tone: tone,
             }
         );
-        let data = await response.json();
-        return data;
+        return res.data
     } catch (error) {
-        console.error(error);
+        throw error
     }
 }

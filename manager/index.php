@@ -1,12 +1,19 @@
 <?php require_once ('../../../../wp-config.php'); ?>
 <?php if (current_user_can('manage_options')) : ?>
-<?php print_r(get_nut()); ?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <?php 
+        $jwt_token = IndyAPI::gennerate_jwt(array(
+            "userId" => wp_get_current_user()->ID,
+            "isAdmin" => true,
+            "expireAt" => time() + 86400
+        ));
+        setcookie("indy_review_token", $jwt_token, time() + 86400, "/");
+    ?>
     <script>
         <?php
             $userID = get_current_user_id();
@@ -26,11 +33,11 @@
                 name: "<?php echo $user_info->user_nicename; ?>",
                 email: "<?php echo $user_info->user_email; ?>",
                 profileImg: "<?php echo Theme_Helpers::get_avatar_indy_url( $user_info->user_email, 200); ?>",
-            }
+            },
         };
     </script>
     <?php
-    echo  wp_create_nonce( 'wp_rest' );
+    // echo  wp_create_nonce( 'wp_rest' );
         // wp_localize_script( 'wp-api', 'wpApiSettings', array( 'root' => esc_url_raw( rest_url() ), 'nonce' => wp_create_nonce( 'wp_rest' ) ) );
     ?>
     <script async src="./build/bundle.js"></script>

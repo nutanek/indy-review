@@ -50,6 +50,20 @@
 			return json_decode(Theme_Helpers::base64_url_decode($token[1]), true);
 		}
 
+		function can_manage($jwt) {
+			if (!$jwt) {
+				http_response_code(403);
+				exit();
+			}
+			$data = self::get_payload_jwt($jwt);
+			if ($data['isAdmin'] && $data['expireAt'] > time()) {
+				// next
+			} else {
+				http_response_code(403);
+				exit();
+			}
+		}
+
 		function get_rating($data) {
 			$postID = $data['post_id'];
 			$rating = get_post_meta($postID, 'indyreview_rating', true);
@@ -182,32 +196,18 @@
 
 		function get_tone() {
 			return array(
-				"result" => 0,
-				"tone" => get_tone()
+				"tone" => Theme_Helpers::get_tone()
 			);
 		}
 
 		function set_tone($data) {
+			self::can_manage($data['jwt']);
 			$tone = $data['tone'];
-
-			// wp_verify_nonce
-
-			
-
+			update_option("indyreview_tone", $tone);
 			return array(
-				"result" => $data['_nonce'],
-				"tone22" => wp_get_current_user()->user_login
+				"result" => "success",
+				"tone" => $tone
 			);
-			// if (!current_user_can('manage_options')) {
-			// 	http_response_code(403);
-			// 	exit();
-			// }
-			// update_option("indyreview_tone", $tone);
-			// return array(
-			// 	"result" => 0,
-			// 	"tone" => $tone
-			// );
-			return get_nut();
 		}
 
 	}

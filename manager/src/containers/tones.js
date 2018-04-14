@@ -32,7 +32,7 @@ export default class Tones extends React.Component {
         setTone(this.state.selected).then((data) => {
             console.log(data)
         }).catch(err => {
-            console.log(err)
+            console.error(err)
         })
     }
 

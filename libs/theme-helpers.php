@@ -303,6 +303,14 @@ class Theme_Helpers {
 		}
 		return $result;
 	}
+
+	function get_tone() {
+		$tone = get_option("indyreview_tone");
+		if ($tone) {
+			return $tone;
+		}
+		return 'pearl';
+	}
 	
     function base64_url_encode($data) {
 		$urlSafeData = strtr(base64_encode($data), '+/', '-_');
