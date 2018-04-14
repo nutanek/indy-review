@@ -1,6 +1,6 @@
 <?php $menu = get_menu(); ?>
 <nav class="row headernav--lg justify-content-center d-none d-md-block">
-    <div class="col-md-11">
+    <div class="col-md-12">
         <ul class="row justify-content-center font-theme">
             <li class="headernav--lg__menu --color-0">
                 <a href="<?php echo get_home_url(); ?>"><?php echo __indy('home'); ?></a>

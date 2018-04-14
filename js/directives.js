@@ -208,7 +208,6 @@ theme.directive('indyImg', ['$window', function ($window) {
             scope: {
                 options: '='
             },
-            controller: 'postItem',
             templateUrl: indyConfig.theme_url + "/directives/post-item.html"
         };
     })

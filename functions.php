@@ -35,6 +35,7 @@
 	}
 
 	function get_theme_config() {
+		
 		global $theme_lang;
 		$theme_lang = get_locale();
 		$config = array(
@@ -435,6 +436,21 @@
 		return $result;
 	}
 
+	function get_tone() {
+		$tone = get_option("indyreview_tone");
+		if ($tone) {
+			return $tone;
+		}
+		return 'pearl';
+	}
+
+	function get_nut() {
+		return array(
+			"result" => "ss"
+		);
+	}
+	
+
 	/***************** API *****************/
 	class IndyAPI {
 		private static $route = 'indy-review/v1';
@@ -445,6 +461,8 @@
 			self::register('/rating/(?P<post_id>\d+)', 'push_rating', 'POST');
 			self::register('/posts', 'get_posts', 'POST');
 			self::register('/logo', 'upload_logo', 'POST');
+			self::register('/tone', 'get_tone', 'get');
+			self::register('/tone', 'set_tone', 'post');
 		}
 
 		static function register($path, $function, $method) {
@@ -478,7 +496,8 @@
 			if ($ratingAvg != null) {
 				return array(
 					"result" => 0,
-					"avg" => floatval($ratingAvg)
+					"avg" => floatval($ratingAvg),
+					"is_user_logged_in" => wp_get_current_user()->ID
 				);
 			} else {
 				return array(
@@ -581,6 +600,36 @@
 					"result" => 1
 				);
 			}
+		}
+
+		function get_tone() {
+			return array(
+				"result" => 0,
+				"tone" => get_tone()
+			);
+		}
+
+		function set_tone($data) {
+			$tone = $data['tone'];
+
+			// wp_verify_nonce
+
+			
+
+			return array(
+				"result" => $data['_nonce'],
+				"tone22" => wp_get_current_user()->user_login
+			);
+			// if (!current_user_can('manage_options')) {
+			// 	http_response_code(403);
+			// 	exit();
+			// }
+			// update_option("indyreview_tone", $tone);
+			// return array(
+			// 	"result" => 0,
+			// 	"tone" => $tone
+			// );
+			return get_nut();
 		}
 
 	}

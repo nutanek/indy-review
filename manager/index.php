@@ -1,5 +1,6 @@
 <?php require_once ('../../../../wp-config.php'); ?>
 <?php if (current_user_can('manage_options')) : ?>
+<?php print_r(get_nut()); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,6 +15,8 @@
         var config = {
             rootUrl: "<?php echo get_site_url(); ?>",
             themeUrl: "<?php echo get_template_directory_uri(); ?>",
+            api: "<?php echo get_site_url().'/wp-json/indy-review/v1/'?>",
+            nonce: "<?php echo wp_create_nonce( 'wp_rest' )?>",
             setting: {
                 profile: "<?php echo get_edit_user_link(); ?>",
                 category: "<?php echo admin_url('edit-tags.php?taxonomy=category')?>"
@@ -26,6 +29,10 @@
             }
         };
     </script>
+    <?php
+    echo  wp_create_nonce( 'wp_rest' );
+        // wp_localize_script( 'wp-api', 'wpApiSettings', array( 'root' => esc_url_raw( rest_url() ), 'nonce' => wp_create_nonce( 'wp_rest' ) ) );
+    ?>
     <script async src="./build/bundle.js"></script>
     <title>IndyReview Manager</title>
   </head>
