@@ -1,16 +1,16 @@
 <?php get_header(); ?>
 <?php 
 	$post_ID = get_the_ID(); 
-	$category = gen_category_detail(get_the_category());
-	$image = get_post_image_url($post_ID, "large")[0];
-	set_post_views($post_ID);
+	$category = Theme_Helpers::gen_category_detail(get_the_category());
+	$image = Theme_Helpers::get_post_image_url($post_ID, "large")[0];
+	Theme_Helpers::set_post_views($post_ID);
 ?>
 <article class="row article justify-content-center" ng-controller="article">
 	<div class="col-12 article__header text-center" style="
 		<?php if ($image) : ?>
 			background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(<?php echo $image; ?>)
 		<?php else : ?>
-			background-color: <?php echo gen_background_color($post_ID); ?>
+			background-color: <?php echo Theme_Helpers::gen_background_color($post_ID); ?>
 		<?php endif; ?>">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 col-lg-9 col-11">
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col d-lg-none">
 				<?php 
-					get_component('social-sharing', array(
+					Theme_Helpers::get_component('social-sharing', array(
 						"url" => get_permalink(),
 						"title" => get_the_title()
 					)); 
@@ -54,7 +54,7 @@
 			<aside class="col">
 				<div class="d-none d-lg-block">
 					<?php 
-						get_component('social-sharing', array(
+						Theme_Helpers::get_component('social-sharing', array(
 							"url" => get_permalink(),
 							"title" => get_the_title()
 						)); 
@@ -65,7 +65,7 @@
 						<content-rating post-id="<?php echo $post_ID; ?>"></content-rating>
 					</div>
 				</div>
-				<?php get_component('new-posts', array('limit' => 3)); ?>
+				<?php Theme_Helpers::get_component('new-posts', array('limit' => 3)); ?>
 			</aside>
 		</div>
 	</div>

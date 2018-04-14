@@ -1,5 +1,5 @@
 <?php 
-    $socials = get_social(); 
+    $socials = Theme_Helpers::get_social(); 
     $list = array(
         array('name' => 'facebook', 'icon' => 'facebook', 'url' => 'https://www.facebook.com/'),
         array('name' => 'twitter', 'icon' => 'twitter', 'url' => 'https://twitter.com/'),

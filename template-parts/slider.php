@@ -1,5 +1,5 @@
 <?php 
-    $the_query = gen_query_post(array(
+    $the_query = Theme_Helpers::gen_query_post(array(
         'catID' => 'all',
         'orderBy' => 'new',
         'numberOfPost' => 3
@@ -12,8 +12,8 @@
         while ($the_query->have_posts()) :
             $the_query->the_post();
             $postid = get_the_ID();
-            $image = get_post_image_url($postid, "full")[0];
-            $category = gen_category_detail(get_the_category());
+            $image = Theme_Helpers::get_post_image_url($postid, "full")[0];
+            $category = Theme_Helpers::gen_category_detail(get_the_category());
             $url = esc_url(get_permalink($postid));
     ?>
         <?php if ($image) : ?>
@@ -46,7 +46,7 @@
             </a>
         </div>
         <?php else : ?>
-        <div class="slider__item text-center" style="background-color: <?php echo gen_background_color($postid); ?>">
+        <div class="slider__item text-center" style="background-color: <?php echo Theme_Helpers::gen_background_color($postid); ?>">
             <div class="slider__title slider__title--2">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 col-11">

@@ -1,4 +1,4 @@
-<?php $menu = get_menu(); ?>
+<?php $menu = Theme_Helpers::get_menu(); ?>
 <nav class="row headernav--lg justify-content-center d-none d-md-block">
     <div class="col-md-12">
         <ul class="row justify-content-center font-theme">

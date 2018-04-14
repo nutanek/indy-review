@@ -1,5 +1,5 @@
 <?php 
-    $the_query = gen_query_post(array(
+    $the_query = Theme_Helpers::gen_query_post(array(
         'catID' => $data['category'],
         'orderBy' => 'new',
         'page' => 1,
@@ -35,14 +35,14 @@
             ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 postitem tile"  masonry-tile>
                 <?php
-                    get_component('post-item', array(
+                    Theme_Helpers::get_component('post-item', array(
                         'post_ID' => $postid,
                         'title' => get_the_title(),
-                        'image' => get_post_image_url($postid, "medium")[0],
+                        'image' => Theme_Helpers::get_post_image_url($postid, "medium")[0],
                         'post_time' => get_post_time('j M Y', true),
                         'post_url' => esc_url(get_permalink($postid)),
-                        'content' => gen_summary(get_the_content(), 120),
-                        'category' => gen_category_detail(get_the_category())
+                        'content' => Theme_Helpers::gen_summary(get_the_content(), 120),
+                        'category' => Theme_Helpers::gen_category_detail(get_the_category())
                     ));
                 ?>
                 </div>

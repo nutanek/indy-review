@@ -1,10 +1,10 @@
 			<?php wp_footer(); ?>
 			<footer class="row footer text-center">
 				<div class="col-12 footer__social">
-					<?php get_component('social-following'); ?>
+					<?php Theme_Helpers::get_component('social-following'); ?>
 				</div>
 				<div class="col-12">
-					<?php get_component('copyright'); ?>
+					<?php Theme_Helpers::get_component('copyright'); ?>
 				</div>
 			</footer>
 		</div>

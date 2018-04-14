@@ -12,14 +12,14 @@
 		<?php endif; ?>
 		<?php wp_head(); ?>
 		<script>
-			var indyConfig = <?php echo get_theme_config(); ?>;
+			var indyConfig = <?php echo Theme_Enqueue::get_theme_config(); ?>;
 		</script>
 	</head>
 	<body ng-app="indyReview">
 		<div class="container-fluid">
 			<div ng-controller="header">
-			<?php get_component('header'); ?>
-			<?php get_component('nav-lg'); ?>
-			<?php get_component('nav-xs'); ?>
+			<?php Theme_Helpers::get_component('header'); ?>
+			<?php Theme_Helpers::get_component('nav-lg'); ?>
+			<?php Theme_Helpers::get_component('nav-xs'); ?>
 			</div>
 		

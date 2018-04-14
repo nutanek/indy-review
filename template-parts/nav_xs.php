@@ -1,4 +1,4 @@
-<?php $menu = get_menu(); ?>
+<?php $menu = Theme_Helpers::get_menu(); ?>
 <div class="col-12 resmenu animated font-theme d-md-none" ng-show="navStatus || isBusy" ng-cloak
     ng-class="navStatus ? 'fadeInRightBig' : 'fadeOutRightBig'">
 	<div class="row resmenu__close justify-content-end">
@@ -6,7 +6,7 @@
 	</div>
 	<div class="row resmenu__search justify-content-center">
 		<div class="col-9 font-normal">
-		    <?php get_component('search-form'); ?>
+		    <?php Theme_Helpers::get_component('search-form'); ?>
 		</div>
 	</div>
 	<div class="row resmenu__item justify-content-center">

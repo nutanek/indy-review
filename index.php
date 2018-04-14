@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<?php endwhile; ?> 
-			<?php get_component('pagination'); ?>
+			<?php Theme_Helpers::get_component('pagination'); ?>
 		<?php else: ?>
 			<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
 		<?php endif; ?>

@@ -25,7 +25,7 @@
                 id: <?php echo $user_info->ID; ?>,
                 name: "<?php echo $user_info->user_nicename; ?>",
                 email: "<?php echo $user_info->user_email; ?>",
-                profileImg: "<?php echo get_avatar_indy_url( $user_info->user_email, 200); ?>",
+                profileImg: "<?php echo Theme_Helpers::get_avatar_indy_url( $user_info->user_email, 200); ?>",
             }
         };
     </script>
