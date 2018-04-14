@@ -15,7 +15,7 @@
 		<div class="row item justify-content-center">
 			<form class="col-lg-4" method="get"  action="<?php echo esc_url( home_url( '/' ) ); ?>">
     			<div class="input-group">
-				<input type="text" class="form-control" name="s" placeholder="<?php echo __indy('enter_search'); ?>">
+				<input type="text" class="form-control" name="s" placeholder="<?php echo Theme_Locale::get('enter_search'); ?>">
 				<span class="input-group-btn">
 					<button type="submit" class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
 				</span>

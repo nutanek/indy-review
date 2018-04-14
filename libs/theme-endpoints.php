@@ -19,6 +19,37 @@
 			) );
 		}
 
+		function gennerate_jwt($payload) {
+			$secret_key = constant('AUTH_KEY');						
+			$header = array(
+				"typ" => "JWT",
+    			"alg" => "HS256"
+			);
+			$headerEncoded = Theme_Helpers::base64_url_encode(json_encode($header));
+			$payloadEncoded = Theme_Helpers::base64_url_encode(json_encode($payload));
+			$rawSignature = hash_hmac('sha256', "$headerEncoded.$payloadEncoded", $secret_key, true);
+			$signatureEncoded = Theme_Helpers::base64_url_encode($rawSignature);
+			$jwt = "$headerEncoded.$payloadEncoded.$signatureEncoded";
+			return $jwt;
+		}
+
+		function verify_jwt($jwt) {
+			$secret_key = constant('AUTH_KEY');			
+			list($headerEncoded, $payloadEncoded, $signatureEncoded) = explode('.', $jwt);
+			$dataEncoded = "$headerEncoded.$payloadEncoded";
+			$signature = Theme_Helpers::base64_url_decode($signatureEncoded);
+			$rawSignature = hash_hmac('sha256', $dataEncoded, $secret_key, true);
+			if (hash_equals($rawSignature, $signature)) {
+				return true;
+			}
+			return false;
+		}
+
+		function get_payload_jwt($jwt) {
+			$token = explode(".", $jwt);
+			return json_decode(Theme_Helpers::base64_url_decode($token[1]), true);
+		}
+
 		function get_rating($data) {
 			$postID = $data['post_id'];
 			$rating = get_post_meta($postID, 'indyreview_rating', true);

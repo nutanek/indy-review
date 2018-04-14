@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="row resmenu__item justify-content-center">
-        <a href="<?php echo get_home_url(); ?>"><?php echo __indy('home'); ?></a>
+        <a href="<?php echo get_home_url(); ?>"><?php echo Theme_Locale::get('home'); ?></a>
 	</div>
 	<?php foreach ($menu as $key=>$item) : ?>
 	<div class="row resmenu__item justify-content-center">

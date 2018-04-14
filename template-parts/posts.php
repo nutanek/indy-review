@@ -51,7 +51,7 @@
     <?php else: ?>
         <div class="col posts__empty text-center">
             <img src="<?php echo get_template_directory_uri(); ?>/images/no_result.svg" />
-            <p><?php echo __indy('no_posts_matched'); ?></p>
+            <p><?php echo Theme_Locale::get('no_posts_matched'); ?></p>
         </div>
     <?php endif; ?>
 
@@ -65,7 +65,7 @@
     <div class="row posts__loadmore font-theme" ng-show="showLoadMore">
         <div class="col text-center">
             <button class="btn btn-lg btn-info" ng-click="loadMore()" >
-                <?php echo __indy('load_more'); ?>
+                <?php echo Theme_Locale::get('load_more'); ?>
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
             </button>
         </div>

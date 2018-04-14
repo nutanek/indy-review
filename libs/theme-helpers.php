@@ -303,7 +303,17 @@ class Theme_Helpers {
 		}
 		return $result;
 	}
-    
+	
+    function base64_url_encode($data) {
+		$urlSafeData = strtr(base64_encode($data), '+/', '-_');
+		return rtrim($urlSafeData, '='); 
+	} 
+	
+	function base64_url_decode($data) {
+		$urlUnsafeData = strtr($data, '-_', '+/');
+		$paddedData = str_pad($urlUnsafeData, strlen($data) % 4, '=', STR_PAD_RIGHT);
+		return base64_decode($paddedData);
+	}
 }
 
 ?>
